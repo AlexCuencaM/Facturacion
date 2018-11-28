@@ -2,7 +2,7 @@
 using Avicarnes;
 namespace DAO
 {
-    public class DelegadoCliente
+    public class DelegadoCliente // Es el delegado del cliente
     {
         private AccesoDAO sistemaBd;       
         public DelegadoCliente(OracleConnection cn)

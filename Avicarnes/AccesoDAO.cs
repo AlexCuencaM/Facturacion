@@ -2,7 +2,7 @@
 using Avicarnes;
 namespace DAO
 {
-    class AccesoDAO
+    public class AccesoDAO // Se crea cliente y telefono
     {
         private Plantilla<Cliente> clienteBd;
         private Plantilla<Telefono> telfBd;

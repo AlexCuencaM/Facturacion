@@ -14,11 +14,11 @@ namespace DAO
 
         public Factura Factura { get => factura; set => factura = value; }
 
-        public EmpresaDAO(OracleConnection cn)
+        public EmpresaDAO(OracleConnection cn, Factura factura)
         {
             Persona = new AccesoCliente();
             Param = new ParametrosOracle();
-            factura = new Factura();
+            this.factura = factura;
             Conexion = cn;
         }
         public override void insert(EmpresaDAO a)

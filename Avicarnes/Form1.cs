@@ -13,44 +13,40 @@ namespace Avicarnes
 {
     public partial class Form1 : Form
     {
-        private OracleConnection conexion;
-        private DelegadoCliente pedidoPorNombre;
-        private DelegadoCliente pedidoPorId;
-        private FacturaDAO factura;
+        private OracleConnection conexion;        
+        
+        private DelegadoCliente cliente;
+        private Factura factura;
         public Form1()
         {
             conexion = new OracleConnection("DATA SOURCE=localhost:1521/XE;PERSIST SECURITY INFO=True;USER ID=ADMINISTRADOR;PASSWORD=avicarnes");
-            pedidoPorNombre = new DelegadoCliente(conexion);
-            pedidoPorId = new DelegadoCliente(conexion);
-            factura = new FacturaDAO(conexion);
+            
+            factura = new Factura();
             InitializeComponent();
         }
-
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
-            if(textBoxCliente.Focused )
+            
+            if (textBoxCliente.Focused )
             {
-                condicionDeSelectPorNombre();
+                DelegadoCliente pedidoPorNombre = new DelegadoCliente(conexion);
+                pedidoPorNombre = condicionDeSelectPorNombre(pedidoPorNombre);
                 presentarDatosPor(pedidoPorNombre, textBoxIdCliente, "" + pedidoPorNombre.getId());
+                cliente = pedidoPorNombre;
             }         
+
         }
 
-        private void condicionDeSelectPorNombre()
-        {
-            if (textBoxCliente.Text != "")
-                pedidoPorNombre.select(nombre: textBoxCliente.Text);
-            else
-                pedidoPorNombre.select();
-        }
-        
         private void textBoxIdCliente_TextChanged(object sender, EventArgs e)
         {
             try
             {
                 if (textBoxIdCliente.Focused)
                 {
-                    condicionDeSelectPorId();
+                    DelegadoCliente pedidoPorId = new DelegadoCliente(conexion);
+                    pedidoPorId = condicionDeSelectPorId(pedidoPorId);
                     presentarDatosPor(pedidoPorId, textBoxCliente, pedidoPorId.getNombre());
+                    cliente = pedidoPorId;
                 }
             }
             catch (FormatException)
@@ -59,16 +55,23 @@ namespace Avicarnes
             }           
         }
 
-        private void condicionDeSelectPorId()
+        private DelegadoCliente condicionDeSelectPorId(DelegadoCliente id)
         {
             if (textBoxIdCliente.Text != "")
-                pedidoPorId.select(id: Convert.ToInt32(textBoxIdCliente.Text));
-
+                id.select(id: Convert.ToInt32(textBoxIdCliente.Text));
             else
-                pedidoPorId.select();
-            
+                id.select();
+            return id;
         }
 
+        private DelegadoCliente condicionDeSelectPorNombre(DelegadoCliente nombre)
+        {
+            if (textBoxCliente.Text != "")
+                nombre.select(nombre: textBoxCliente.Text);
+            else
+                nombre.select();
+            return nombre;
+        }
         private void operacionesDeExcepcion()
         {
             MessageBox.Show("Escriba números");
@@ -78,31 +81,21 @@ namespace Avicarnes
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
             cargarHeader();
+            cargarDatosEmpresa();
         }
+        
         private void cargarHeader()
         {
-            cargarDatosEmpresa();
-            obtenerHeader();
-            
-        }
-        private void obtenerHeader()
-        {
-            Plantilla<FacturaDAO> fact = new FacturaDAO(conexion);
+            Plantilla<FacturaDAO> fact = new FacturaDAO(conexion,this.factura);
             fact.select(0,"");
             FacturaDAO factura = (FacturaDAO)fact;
-            presentarDatos1(factura);
-        }
-
-        private void presentarDatos1(FacturaDAO factura)
-        {
-            labelIdPedido.Text = "Nota de Venta:\n\n"+ " " + factura.Factura.Id;
-            labelFecha.Text = "Fecha:\n\n" + "  " + factura.Factura.Fecha;
-        }
+            presentarDatos(factura);
+            this.factura = factura.Factura;
+        }    
         private void cargarDatosEmpresa()
         {
-            Plantilla<EmpresaDAO> datosEmpresa = new EmpresaDAO(conexion);
+            Plantilla<EmpresaDAO> datosEmpresa = new EmpresaDAO(conexion,factura);
             datosEmpresa.select(0, "");
             EmpresaDAO dato = (EmpresaDAO)datosEmpresa;
             presentarDatos(dato);
@@ -116,6 +109,11 @@ namespace Avicarnes
             presentarDatos(datoTelf);
         }
 
+        private void presentarDatos(FacturaDAO factura)
+        {
+            labelIdPedido.Text = "Nota de Venta:\n\n" + " " + factura.Factura.Id;
+            labelFecha.Text = "Fecha:\n\n" + "  " + factura.Factura.Fecha;
+        }
         private void presentarDatos(TelefonoEmpresaDAO telefono)
         {
             labelTelfonoDeEmpresa.Text += "  " + telefono.Persona.Cliente.Telf.presentarTelf();

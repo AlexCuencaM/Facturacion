@@ -11,11 +11,11 @@ namespace DAO
         private Factura factura;
         public Factura Factura { get => factura; }
 
-        public FacturaDAO(OracleConnection cn)
+        public FacturaDAO(OracleConnection cn, Factura factura)
         {
             Param = new ParametrosOracle();
             Conexion = cn;
-            factura = new Factura();
+            this.factura = factura;
         }
 
         public override void update(FacturaDAO cliente)
