@@ -27,16 +27,17 @@ namespace Avicarnes
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
             
-            if (textBoxCliente.Focused )
+            if (textBoxCliente.Focused)
             {
                 DelegadoCliente pedidoPorNombre = new DelegadoCliente(conexion);
-                pedidoPorNombre = condicionDeSelectPorNombre(pedidoPorNombre);
+                Busqueda search = new BusquedaPorNombre(textBoxCliente, pedidoPorNombre);
+                pedidoPorNombre = search.buscarCliente(pedidoPorNombre); 
                 presentarDatosPor(pedidoPorNombre, textBoxIdCliente, "" + pedidoPorNombre.getId());
                 cliente = pedidoPorNombre;
             }         
 
         }
-
+        
         private void textBoxIdCliente_TextChanged(object sender, EventArgs e)
         {
             try
@@ -44,7 +45,8 @@ namespace Avicarnes
                 if (textBoxIdCliente.Focused)
                 {
                     DelegadoCliente pedidoPorId = new DelegadoCliente(conexion);
-                    pedidoPorId = condicionDeSelectPorId(pedidoPorId);
+                    Busqueda search = new BusquedaPorId(textBoxIdCliente, pedidoPorId);
+                    pedidoPorId = search.buscarCliente(pedidoPorId);
                     presentarDatosPor(pedidoPorId, textBoxCliente, pedidoPorId.getNombre());
                     cliente = pedidoPorId;
                 }
@@ -55,23 +57,18 @@ namespace Avicarnes
             }           
         }
 
-        private DelegadoCliente condicionDeSelectPorId(DelegadoCliente id)
+        private void presentarDatosPor(DelegadoCliente pedido, TextBox criterio, string campo)
         {
-            if (textBoxIdCliente.Text != "")
-                id.select(id: Convert.ToInt32(textBoxIdCliente.Text));
-            else
-                id.select();
-            return id;
-        }
+            criterio.Text = campo;
+            if (criterio.Text == "0")
+                criterio.Text = ""; 
 
-        private DelegadoCliente condicionDeSelectPorNombre(DelegadoCliente nombre)
-        {
-            if (textBoxCliente.Text != "")
-                nombre.select(nombre: textBoxCliente.Text);
-            else
-                nombre.select();
-            return nombre;
-        }
+            labelDireccionCliente.Text = "Direccion: " + pedido.getDireccion();
+            labelEstadoDePago.Text = "Estado: " + pedido.getEstado();
+            labelTelefono.Text = "Teléfono(s): " + pedido.getTelf();
+        }        
+
+       
         private void operacionesDeExcepcion()
         {
             MessageBox.Show("Escriba números");
@@ -81,8 +78,10 @@ namespace Avicarnes
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            
             cargarHeader();
             cargarDatosEmpresa();
+
         }
         
         private void cargarHeader()
@@ -123,17 +122,7 @@ namespace Avicarnes
         {
             labelNombreEmpresa.Text = dato.Factura.NombreEmpresa;
             labelDireccionEmpresa.Text = dato.Factura.DireccionEmpresa;
-        }
-
-        private void presentarDatosPor(DelegadoCliente pedido,TextBox criterio,string campo)
-        {
-            criterio.Text = campo;
-            labelDireccionCliente.Text = "Direccion: " + pedido.getDireccion();
-            labelEstadoDePago.Text = "Estado: " + pedido.getEstado();
-            if (criterio.Text == "0")
-                criterio.Text = "";
-            labelTelefono.Text ="Teléfono(s): " + pedido.getTelf();
-        }
+        } 
     
         private void buttonGenerarFactura_Click(object sender, EventArgs e)
         {

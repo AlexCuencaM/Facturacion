@@ -22,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>ExtendedCorrectnessRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -48,6 +49,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccesoDAO.cs" />
+    <Compile Include="BusquedaPorId.cs" />
+    <Compile Include="BusquedaPorNombre.cs" />
     <Compile Include="ClienteDAO.cs" />
     <Compile Include="DelegadoCliente.cs" />
     <Compile Include="EmpresaDAO.cs" />
@@ -63,6 +66,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="LineaProducto.cs" />
+    <Compile Include="Busqueda.cs" />
     <Compile Include="Pago.cs" />
     <Compile Include="FacturaDAO.cs" />
     <Compile Include="ParametrosOracle.cs" />
