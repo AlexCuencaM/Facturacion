@@ -10,10 +10,17 @@ namespace Avicarnes
 
         }
 
-        public override DelegadoCliente seleccion(TextBox criterio)
+        protected override DelegadoCliente seleccion(TextBox criterio)
         {
             Cliente.select(nombre: criterio.Text);
             return Cliente;
+        }
+        protected override void filtro(TextBox filtro)
+        {
+            filtro.Text = Cliente.getId().ToString();
+            if (filtro.Text == "0")
+                filtro.Text = "";
+            
         }
     }
 }

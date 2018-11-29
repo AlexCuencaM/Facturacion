@@ -19,37 +19,23 @@ namespace Avicarnes
         private Factura factura;
         public Form1()
         {
-            conexion = new OracleConnection("DATA SOURCE=localhost:1521/XE;PERSIST SECURITY INFO=True;USER ID=ADMINISTRADOR;PASSWORD=avicarnes");
-            
+            conexion = new OracleConnection("DATA SOURCE=localhost:1521/XE;PERSIST SECURITY INFO=True;USER ID=ADMINISTRADOR;PASSWORD=avicarnes");            
             factura = new Factura();
             InitializeComponent();
         }
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-            
-            if (textBoxCliente.Focused)
-            {
-                DelegadoCliente pedidoPorNombre = new DelegadoCliente(conexion);
-                Busqueda search = new BusquedaPorNombre(textBoxCliente, pedidoPorNombre);
-                pedidoPorNombre = search.buscarCliente(pedidoPorNombre); 
-                presentarDatosPor(pedidoPorNombre, textBoxIdCliente, "" + pedidoPorNombre.getId());
-                cliente = pedidoPorNombre;
-            }         
 
-        }
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {        
+            if (textBoxCliente.Focused)                
+                operacionDatosCliente(textBoxCliente,textBoxIdCliente,BuscarPor.NOMBRE);
+        }        
         
         private void textBoxIdCliente_TextChanged(object sender, EventArgs e)
         {
             try
             {
-                if (textBoxIdCliente.Focused)
-                {
-                    DelegadoCliente pedidoPorId = new DelegadoCliente(conexion);
-                    Busqueda search = new BusquedaPorId(textBoxIdCliente, pedidoPorId);
-                    pedidoPorId = search.buscarCliente(pedidoPorId);
-                    presentarDatosPor(pedidoPorId, textBoxCliente, pedidoPorId.getNombre());
-                    cliente = pedidoPorId;
-                }
+                if (textBoxIdCliente.Focused)                 
+                    operacionDatosCliente(textBoxIdCliente, textBoxCliente,BuscarPor.ID);
             }
             catch (FormatException)
             {
@@ -57,18 +43,15 @@ namespace Avicarnes
             }           
         }
 
-        private void presentarDatosPor(DelegadoCliente pedido, TextBox criterio, string campo)
+        private void operacionDatosCliente(TextBox campo, TextBox campo2, BuscarPor criterio)
         {
-            criterio.Text = campo;
-            if (criterio.Text == "0")
-                criterio.Text = ""; 
+            DelegadoCliente pedidoPor = new DelegadoCliente(conexion);           
+            Busqueda search = FactoryDeBusqueda.crear(campo, pedidoPor, criterio);
+            pedidoPor = search.buscarCliente(pedidoPor);
+            search.test(labelDireccionCliente, labelEstadoDePago, labelTelefono, campo2);
+            cliente = pedidoPor;
+        }
 
-            labelDireccionCliente.Text = "Direccion: " + pedido.getDireccion();
-            labelEstadoDePago.Text = "Estado: " + pedido.getEstado();
-            labelTelefono.Text = "Teléfono(s): " + pedido.getTelf();
-        }        
-
-       
         private void operacionesDeExcepcion()
         {
             MessageBox.Show("Escriba números");
@@ -77,11 +60,9 @@ namespace Avicarnes
         }
 
         private void Form1_Load(object sender, EventArgs e)
-        {
-            
+        {    
             cargarHeader();
             cargarDatosEmpresa();
-
         }
         
         private void cargarHeader()
@@ -92,6 +73,7 @@ namespace Avicarnes
             presentarDatos(factura);
             this.factura = factura.Factura;
         }    
+
         private void cargarDatosEmpresa()
         {
             Plantilla<EmpresaDAO> datosEmpresa = new EmpresaDAO(conexion,factura);
@@ -100,6 +82,7 @@ namespace Avicarnes
             presentarDatos(dato);
             cargarTelf();
         }
+
         private void cargarTelf()
         {
             Plantilla<Telefono> telf = new TelefonoEmpresaDAO(conexion);
@@ -107,12 +90,13 @@ namespace Avicarnes
             TelefonoEmpresaDAO datoTelf = (TelefonoEmpresaDAO)telf;
             presentarDatos(datoTelf);
         }
-
+        ///-------------------------------------------///
         private void presentarDatos(FacturaDAO factura)
         {
             labelIdPedido.Text = "Nota de Venta:\n\n" + " " + factura.Factura.Id;
             labelFecha.Text = "Fecha:\n\n" + "  " + factura.Factura.Fecha;
         }
+
         private void presentarDatos(TelefonoEmpresaDAO telefono)
         {
             labelTelfonoDeEmpresa.Text += "  " + telefono.Persona.Cliente.Telf.presentarTelf();
@@ -126,7 +110,11 @@ namespace Avicarnes
     
         private void buttonGenerarFactura_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Funcionalidad no agregada :(");
+            //Prueba
+            MessageBox.Show(cliente.getId().ToString() +  " " + cliente.getNombre() + " " +
+                             cliente.getEstado()  + " " + cliente.getDireccion() + " " +
+                             cliente.getTelf());
+            MessageBox.Show(factura.Id.ToString()  + " " + factura.Fecha);
         }
     }
 }

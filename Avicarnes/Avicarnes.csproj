@@ -49,12 +49,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccesoDAO.cs" />
+    <Compile Include="BuscarPor.cs" />
     <Compile Include="BusquedaPorId.cs" />
     <Compile Include="BusquedaPorNombre.cs" />
     <Compile Include="ClienteDAO.cs" />
     <Compile Include="DelegadoCliente.cs" />
     <Compile Include="EmpresaDAO.cs" />
     <Compile Include="AccesoCliente.cs" />
+    <Compile Include="FactoryDeBusqueda.cs" />
     <Compile Include="IDao.cs" />
     <Compile Include="Cliente.cs" />
     <Compile Include="DescripcionProducto.cs" />
