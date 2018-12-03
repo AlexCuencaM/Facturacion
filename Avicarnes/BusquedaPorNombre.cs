@@ -5,10 +5,7 @@ namespace Avicarnes
     
     public class BusquedaPorNombre : Busqueda
     {
-        public BusquedaPorNombre(TextBox criterio, DelegadoCliente client) : base(criterio, client)
-        {
-
-        }
+        public BusquedaPorNombre(TextBox criterio, DelegadoCliente client) : base(criterio, client){}
 
         protected override DelegadoCliente seleccion(TextBox criterio)
         {

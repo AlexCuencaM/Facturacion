@@ -52,6 +52,10 @@
     <Compile Include="BuscarPor.cs" />
     <Compile Include="BusquedaPorId.cs" />
     <Compile Include="BusquedaPorNombre.cs" />
+    <Compile Include="CargaDeDatos.cs" />
+    <Compile Include="CargaDelEncabezado.cs" />
+    <Compile Include="CargarDatosEmpresa.cs" />
+    <Compile Include="CargaTelefonoEmpresa.cs" />
     <Compile Include="ClienteDAO.cs" />
     <Compile Include="DelegadoCliente.cs" />
     <Compile Include="EmpresaDAO.cs" />

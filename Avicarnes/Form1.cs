@@ -60,57 +60,33 @@ namespace Avicarnes
         }
 
         private void Form1_Load(object sender, EventArgs e)
-        {    
-            cargarHeader();
+        {       
+            loadHeader();
             cargarDatosEmpresa();
+            cargarTelf();
         }
-        
-        private void cargarHeader()
+        private void loadHeader()
         {
-            Plantilla<FacturaDAO> fact = new FacturaDAO(conexion,this.factura);
-            fact.select(0,"");
-            FacturaDAO factura = (FacturaDAO)fact;
-            presentarDatos(factura);
-            this.factura = factura.Factura;
-        }    
+            CargaDelEncabezado fact = new CargaDelEncabezado(labelIdPedido, labelFecha);
+            CargaDeDatos<FacturaDAO> factura = fact;
+            factura.cargar(new FacturaDAO(conexion, this.factura));
+            this.factura = fact.Factura;
+        }      
 
         private void cargarDatosEmpresa()
         {
-            Plantilla<EmpresaDAO> datosEmpresa = new EmpresaDAO(conexion,factura);
-            datosEmpresa.select(0, "");
-            EmpresaDAO dato = (EmpresaDAO)datosEmpresa;
-            presentarDatos(dato);
-            cargarTelf();
+            CargaDeDatos<EmpresaDAO> empresa = new CargarDatosEmpresa(labelNombreEmpresa, labelDireccionEmpresa);
+            empresa.cargar(new EmpresaDAO(conexion, factura));                      
         }
 
         private void cargarTelf()
         {
-            Plantilla<Telefono> telf = new TelefonoEmpresaDAO(conexion);
-            telf.select(0, "");
-            TelefonoEmpresaDAO datoTelf = (TelefonoEmpresaDAO)telf;
-            presentarDatos(datoTelf);
-        }
-        ///-------------------------------------------///
-        private void presentarDatos(FacturaDAO factura)
-        {
-            labelIdPedido.Text = "Nota de Venta:\n\n" + " " + factura.Factura.Id;
-            labelFecha.Text = "Fecha:\n\n" + "  " + factura.Factura.Fecha;
-        }
-
-        private void presentarDatos(TelefonoEmpresaDAO telefono)
-        {
-            labelTelfonoDeEmpresa.Text += "  " + telefono.Persona.Cliente.Telf.presentarTelf();
-        }
-
-        private void presentarDatos(EmpresaDAO dato)
-        {
-            labelNombreEmpresa.Text = dato.Factura.NombreEmpresa;
-            labelDireccionEmpresa.Text = dato.Factura.DireccionEmpresa;
-        } 
-    
+            CargaDeDatos<Telefono> telefono = new CargaTelefonoEmpresa(labelTelfonoDeEmpresa);
+            telefono.cargar(new TelefonoEmpresaDAO(conexion));            
+        }               
         private void buttonGenerarFactura_Click(object sender, EventArgs e)
         {
-            //Prueba
+            
             MessageBox.Show(cliente.getId().ToString() +  " " + cliente.getNombre() + " " +
                              cliente.getEstado()  + " " + cliente.getDireccion() + " " +
                              cliente.getTelf());
