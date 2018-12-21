@@ -8,7 +8,7 @@ namespace Avicarnes
         protected Label campo;
         public abstract void presentarData(Plantilla dato);
         /// <summary>
-        /// Chupalo Jerry
+        /// Presenta datos en la aplicación
         /// </summary>
         /// <param name="presentar"></param>
         public void cargar(Plantilla presentar)
