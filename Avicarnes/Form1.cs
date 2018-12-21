@@ -13,10 +13,10 @@ namespace Avicarnes
 {
     public partial class Form1 : Form
     {
-        private OracleConnection conexion;        
-        
+        private OracleConnection conexion;              
         private DelegadoCliente cliente;
         private Factura factura;
+
         public Form1()
         {
             conexion = new OracleConnection("DATA SOURCE=localhost:1521/XE;PERSIST SECURITY INFO=True;USER ID=ADMINISTRADOR;PASSWORD=avicarnes");            
@@ -43,15 +43,20 @@ namespace Avicarnes
             }           
         }
 
+        /// <summary>
+        /// Método que realiza la búsqueda de pedidos por nombre o por id
+        /// </summary>
+        /// <param name="campo">Campo que indica que tipo de busqueda instanciar</param>
+        /// <param name="campo2">Campo que se rellena por la busqueda del parámetro campo</param>
+        /// <param name="criterio">Puede ser nombre o id</param>
         private void operacionDatosCliente(TextBox campo, TextBox campo2, BuscarPor criterio)
         {
-            DelegadoCliente pedidoPor = new DelegadoCliente(conexion);           
-            Busqueda search = FactoryDeBusqueda.crear(campo, pedidoPor, criterio);
-            pedidoPor = search.buscarCliente(pedidoPor);
-            search.test(labelDireccionCliente, labelEstadoDePago, labelTelefono, campo2);
-            cliente = pedidoPor;
+            DelegadoCliente datosCliente = new DelegadoCliente(conexion);           
+            Busqueda search = FactoryDeBusqueda.crear(campo, datosCliente, criterio);
+            datosCliente = search.buscarCliente(datosCliente);
+            search.asignacionDeCampos(labelDireccionCliente, labelEstadoDePago, labelTelefono, campo2);
+            cliente = datosCliente;//Asignacion de los datos de cliente 
         }
-
         private void operacionesDeExcepcion()
         {
             MessageBox.Show("Escriba números");
@@ -65,12 +70,15 @@ namespace Avicarnes
             cargarDatosEmpresa();
             cargarTelf();
         }
+        /// <summary>
+        /// Cargar Los datos del encabezado a la aplicación
+        /// </summary>
         private void loadHeader()
         {
             CargaDelEncabezado fact = new CargaDelEncabezado(labelIdPedido, labelFecha);
             CargaDeDatos<FacturaDAO> factura = fact;
             factura.cargar(new FacturaDAO(conexion, this.factura));
-            this.factura = fact.Factura;
+            this.factura = fact.Factura; // Para asignar valores de factura.
         }      
 
         private void cargarDatosEmpresa()

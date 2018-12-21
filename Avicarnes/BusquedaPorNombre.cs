@@ -5,18 +5,29 @@ namespace Avicarnes
     
     public class BusquedaPorNombre : Busqueda
     {
-        public BusquedaPorNombre(TextBox criterio, DelegadoCliente client) : base(criterio, client){}
 
-        protected override DelegadoCliente seleccion(TextBox criterio)
+        public BusquedaPorNombre(TextBox nombre, DelegadoCliente client) : base(nombre, client){}
+
+
+        /// <summary>
+        /// Regresa el resultado de los datos del cliente a traves de un nombre
+        /// </summary>
+        /// <param name="cliente">Contiene el nombre del Cliente </param>
+        /// <returns>Los datos del cliente</returns>
+        protected override DelegadoCliente seleccion(TextBox cliente)
         {
-            Cliente.select(nombre: criterio.Text);
+            Cliente.select(nombre: cliente.Text);
             return Cliente;
         }
-        protected override void filtro(TextBox filtro)
+        /// <summary>
+        /// Asigna el campo id con los datos del cliente dados en el metodo seleccion
+        /// </summary>
+        /// <param name="id">El id del cliente que se rellena</param>
+        protected override void filtro(TextBox id)
         {
-            filtro.Text = Cliente.getId().ToString();
-            if (filtro.Text == "0")
-                filtro.Text = "";
+            id.Text = Cliente.getId().ToString();
+            if (id.Text == "0")
+                id.Text = "";
             
         }
     }
