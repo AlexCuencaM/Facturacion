@@ -8,7 +8,7 @@ using Avicarnes;
 using System.Data;
 namespace DAO
 {
-    public class EmpresaDAO:Plantilla<EmpresaDAO>
+    public class EmpresaDAO:Plantilla
     {
         private Factura factura;
 
@@ -21,21 +21,6 @@ namespace DAO
             this.factura = factura;
             Conexion = cn;
         }
-        public override void insert(EmpresaDAO a)
-        {
-
-        }
-
-        public override void update(EmpresaDAO a)
-        {
-
-        }
-
-        public override void delete(int a)
-        {
-
-        }
-
         public override void limpiar()
         {
         }

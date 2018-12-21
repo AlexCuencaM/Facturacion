@@ -6,24 +6,9 @@ using System.Threading.Tasks;
 using Avicarnes;
 namespace DAO
 {
-    public class ProductoDAO : IDao<LineaProducto>
+    public class ProductoDAO
     {
         private List<LineaProducto> lista;
-        public void update(LineaProducto cliente)
-        {
-
-        }
-        public void delete(int id)
-        {
-
-        }
-        public void insert(LineaProducto cliente)
-        {
-
-        }
-        public List<LineaProducto> select()
-        {
-            return lista;
-        }
+        
     }
 }

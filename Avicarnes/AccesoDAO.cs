@@ -4,8 +4,8 @@ namespace DAO
 {
     public class AccesoDAO // Se crea cliente y telefono
     {
-        private Plantilla<Cliente> clienteBd;
-        private Plantilla<Telefono> telfBd;
+        private Plantilla clienteBd;
+        private Plantilla telfBd;
         
         public AccesoDAO(OracleConnection cn)
         {
@@ -13,8 +13,8 @@ namespace DAO
             telfBd = new TelefonoDAO(cn);
         }
 
-        public Plantilla<Cliente> ClienteBd { get => clienteBd; set => clienteBd = value; }
-        public Plantilla<Telefono> TelfBd { get => telfBd; set => telfBd = value; }
+        public Plantilla ClienteBd { get => clienteBd; set => clienteBd = value; }
+        public Plantilla TelfBd { get => telfBd; set => telfBd = value; }
 
         public void select(int? id , string nombre)
         {

@@ -2,7 +2,7 @@
 using DAO;
 namespace Avicarnes
 {
-    public class CargarDatosEmpresa : CargaDeDatos<EmpresaDAO>
+    public class CargarDatosEmpresa : CargaDeDatos
     {
         private Label direccion;
         public CargarDatosEmpresa(Label labelNombreEmpresa, Label labelDireccionEmpresa)
@@ -10,7 +10,7 @@ namespace Avicarnes
             campo = labelNombreEmpresa;
             direccion = labelDireccionEmpresa;
         }
-        public override void presentarData(Plantilla<EmpresaDAO> dato)
+        public override void presentarData(Plantilla dato)
         {
             EmpresaDAO datoEmpresa = (EmpresaDAO)dato;
             campo.Text = datoEmpresa.Factura.NombreEmpresa;

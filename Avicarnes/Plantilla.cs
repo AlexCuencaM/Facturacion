@@ -2,7 +2,7 @@
 using Oracle.ManagedDataAccess.Client;
 namespace DAO
 {
-    public abstract class Plantilla<T>: IDao<T>
+    public abstract class Plantilla: IDao
     {
         private OracleConnection conexion;
         private ParametrosOracle param;
@@ -12,10 +12,6 @@ namespace DAO
         public AccesoCliente Persona { get => persona; set => persona = value; }
         public ParametrosOracle Param { get => param; set => param = value; }
         public abstract OracleCommand selectCliente(int? id, string nombre);
-
-        public abstract void insert(T element);
-        public abstract void delete(int id);
-        public abstract void update(T element);
 
         public abstract void setDatosCliente(OracleDataReader reader);
         public abstract void limpiar();

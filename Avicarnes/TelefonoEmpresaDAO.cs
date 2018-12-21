@@ -9,24 +9,11 @@ namespace DAO
         {
             Persona.Cliente.crearTelefono();
         }
-
-        public override void delete(int id)
-        {
-            base.delete(id);
-        }
-
-        public override void insert(Telefono cliente)
-        {
-            base.insert(cliente);
-        }
+        
         public override void limpiar()
         {
             base.limpiar();
-        }
-        public override void update(Telefono cliente)
-        {
-            base.update(cliente);
-        }
+        }        
 
         public override OracleCommand selectCliente(int? id, string nombre)
         {
@@ -44,6 +31,6 @@ namespace DAO
             orcl.Parameters.Add(Param.getFuncionRef());
             return orcl;
         }
-        
+
     }
 }

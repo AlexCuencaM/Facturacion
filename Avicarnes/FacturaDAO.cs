@@ -5,7 +5,7 @@ using Oracle.ManagedDataAccess.Client;
 namespace DAO
 {
 
-    public class FacturaDAO : Plantilla<FacturaDAO>
+    public class FacturaDAO : Plantilla
     {
         private Factura factura;
         public Factura Factura { get => factura; }
@@ -15,21 +15,7 @@ namespace DAO
             Param = new ParametrosOracle();
             Conexion = cn;
             this.factura = factura;
-        }
-
-        public override void update(FacturaDAO cliente)
-        {
-
-        }
-        public override void delete(int id)
-        {
-
-        }
-        public override void insert(FacturaDAO cliente)
-        {
-
-        }
-        
+        }     
         public override void setDatosCliente(OracleDataReader reader)
         {
             factura.Id = reader.GetInt32(0);

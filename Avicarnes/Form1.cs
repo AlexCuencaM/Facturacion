@@ -76,20 +76,20 @@ namespace Avicarnes
         private void loadHeader()
         {
             CargaDelEncabezado fact = new CargaDelEncabezado(labelIdPedido, labelFecha);
-            CargaDeDatos<FacturaDAO> factura = fact;
+            CargaDeDatos factura = fact;
             factura.cargar(new FacturaDAO(conexion, this.factura));
             this.factura = fact.Factura; // Para asignar valores de factura.
         }      
 
         private void cargarDatosEmpresa()
         {
-            CargaDeDatos<EmpresaDAO> empresa = new CargarDatosEmpresa(labelNombreEmpresa, labelDireccionEmpresa);
+            CargaDeDatos empresa = new CargarDatosEmpresa(labelNombreEmpresa, labelDireccionEmpresa);
             empresa.cargar(new EmpresaDAO(conexion, factura));                      
         }
 
         private void cargarTelf()
         {
-            CargaDeDatos<Telefono> telefono = new CargaTelefonoEmpresa(labelTelfonoDeEmpresa);
+            CargaDeDatos telefono = new CargaTelefonoEmpresa(labelTelfonoDeEmpresa);
             telefono.cargar(new TelefonoEmpresaDAO(conexion));            
         }               
         private void buttonGenerarFactura_Click(object sender, EventArgs e)

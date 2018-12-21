@@ -1,9 +1,7 @@
 ﻿namespace DAO
 {
-    public interface IDao <T>
+    public interface IDao
     {
-        void delete(int id);
-        void insert(T element);
-        void update(T element);
+        void select(int? id, string nombre);
     }
 }

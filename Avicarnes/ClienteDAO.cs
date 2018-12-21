@@ -3,7 +3,7 @@ using System.Data;
 using Avicarnes;
 namespace DAO
 {
-    public class ClienteDAO:Plantilla<Cliente>
+    public class ClienteDAO:Plantilla
     {
         
         public ClienteDAO(OracleConnection cn)
@@ -11,20 +11,7 @@ namespace DAO
             Persona = new AccesoCliente();
             Param = new ParametrosOracle();
             Conexion = cn;
-        }
-
-        public override void update(Cliente cliente)
-        {
-
-        }
-        public  override void delete(int id)
-        {
-
-        }
-        public override void insert(Cliente cliente)
-        {
-
-        }
+        }       
        
         public override OracleCommand selectCliente(int? id, string nombre)
         {

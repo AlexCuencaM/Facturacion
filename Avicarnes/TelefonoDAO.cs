@@ -4,7 +4,7 @@ using System.Data;
 using Avicarnes;
 namespace DAO
 {
-    public class TelefonoDAO :Plantilla <Telefono>
+    public class TelefonoDAO :Plantilla
     {
         
 
@@ -14,18 +14,6 @@ namespace DAO
             Param = new ParametrosOracle();
             Conexion = cn;
         }    
-        public override void update(Telefono cliente)
-        {
-
-        }
-        public override void delete(int id)
-        {
-
-        }
-        public override void insert(Telefono cliente)
-        {
-
-        }      
         
         public virtual OracleCommand selectCliente(string procedure, int? id, string nombre)
         {
