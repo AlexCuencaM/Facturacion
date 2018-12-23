@@ -5,8 +5,7 @@ using Avicarnes;
 namespace DAO
 {
     public class TelefonoDAO :Plantilla
-    {
-        
+    {        
 
         public TelefonoDAO(OracleConnection cn)
         {
@@ -22,7 +21,6 @@ namespace DAO
             orcl.Parameters.Add(Param.getFuncionRef());
             orcl.Parameters.Add(Param.getParam("PN_ID_CLIENTE", DbType.Int32));
             orcl.Parameters.Add(Param.getParam("PV_NOMBRE", DbType.String));
-
             setParamsValueSelect(orcl, id, nombre);
             return orcl;
         }
@@ -45,6 +43,7 @@ namespace DAO
         {
             return selectCliente("operaciones_cliente_pk.SELECTTELEFONOCLIENTE", id, nombre);
         }
+
         public List<string> getTelf()
         {
             List<string> telf = new List<string>();

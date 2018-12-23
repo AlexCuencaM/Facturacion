@@ -102,5 +102,45 @@ namespace Avicarnes
             string[] a = { "codigo", "descripcione", "1", "2", "3", "4", "5","6" };
             dataGridViewProducto.Rows.Add(a);
         }
+
+        
+
+        private void dataGridViewProducto_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            dataGridViewProducto.CurrentRow.Cells[6].ReadOnly = true;
+            switch (e.ColumnIndex)
+            {
+                case 0://Codigo, RF-008
+                    codigo();
+                    break;
+                //case 2://Cantidad                    
+                case 3://Peso
+                    subtotal();
+                    
+                    break;
+                case 6://Porcentaje
+                    total();                    
+                    break;
+                default:
+                    MessageBox.Show("Pusheen");
+                    break;
+
+            }
+        }
+        private void codigo()
+        {
+            dataGridViewProducto.CurrentRow.Cells[1].Value = "!/4 DE POLLO";
+            dataGridViewProducto.CurrentRow.Cells[4].Value = "$10.00";
+        }
+        private void subtotal()
+        {
+            //Validar
+            dataGridViewProducto.CurrentRow.Cells[6].ReadOnly = false;
+            dataGridViewProducto.CurrentRow.Cells[5].Value = "$10.00";
+        }
+        private void total()
+        {
+            dataGridViewProducto.CurrentRow.Cells[7].Value = "$12.00";
+        }
     }
 }

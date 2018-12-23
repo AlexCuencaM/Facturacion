@@ -75,6 +75,7 @@
             this.dataGridViewProducto.Name = "dataGridViewProducto";
             this.dataGridViewProducto.Size = new System.Drawing.Size(1240, 150);
             this.dataGridViewProducto.TabIndex = 0;
+            this.dataGridViewProducto.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewProducto_CellEndEdit);
             // 
             // codigoProducto
             // 

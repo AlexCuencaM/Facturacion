@@ -11,9 +11,23 @@ namespace DAO
         protected OracleConnection Conexion { get => conexion; set => conexion = value; }
         public AccesoCliente Persona { get => persona; set => persona = value; }
         public ParametrosOracle Param { get => param; set => param = value; }
-        public abstract OracleCommand selectCliente(int? id, string nombre);
 
+
+        /// <summary>
+        /// Es un metodo que extrae la consulta dela BD
+        /// </summary>
+        /// <param name="id">id del cliente </param>
+        /// <param name="nombre">Nombre del cliente</param>
+        /// <returns></returns>
+        public abstract OracleCommand selectCliente(int? id, string nombre);
+        /// <summary>
+        /// Inicialilzar los datos de un objeto mediante la BD
+        /// </summary>
+        /// <param name="reader">Lector de la consulta</param>
         public abstract void setDatosCliente(OracleDataReader reader);
+        /// <summary>
+        /// Borrar los datos establecidos por la BD del objeto
+        /// </summary>
         public abstract void limpiar();
 
         public void select(int? id, string nombre)
