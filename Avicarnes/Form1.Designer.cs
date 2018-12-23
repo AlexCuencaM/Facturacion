@@ -29,6 +29,14 @@
         private void InitializeComponent()
         {
             this.dataGridViewProducto = new System.Windows.Forms.DataGridView();
+            this.codigoProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.descripcionProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cantidadProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pesoProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.precioProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.subtotalProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.descuentoProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.totalProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.buttonGenerarFactura = new System.Windows.Forms.Button();
             this.labelNombreEmpresa = new System.Windows.Forms.Label();
             this.labelDireccionEmpresa = new System.Windows.Forms.Label();
@@ -44,14 +52,6 @@
             this.textBoxCliente = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.labelCampoTelf = new System.Windows.Forms.Label();
-            this.codigoProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.descripcionProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cantidadProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pesoProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.precioProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.subtotalProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.descuentoProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.totalProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProducto)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -75,6 +75,52 @@
             this.dataGridViewProducto.Name = "dataGridViewProducto";
             this.dataGridViewProducto.Size = new System.Drawing.Size(1240, 150);
             this.dataGridViewProducto.TabIndex = 0;
+            // 
+            // codigoProducto
+            // 
+            this.codigoProducto.HeaderText = "Código";
+            this.codigoProducto.Name = "codigoProducto";
+            // 
+            // descripcionProducto
+            // 
+            this.descripcionProducto.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.descripcionProducto.HeaderText = "Descripción";
+            this.descripcionProducto.Name = "descripcionProducto";
+            this.descripcionProducto.ReadOnly = true;
+            this.descripcionProducto.Width = 500;
+            // 
+            // cantidadProducto
+            // 
+            this.cantidadProducto.HeaderText = "Cantidad";
+            this.cantidadProducto.Name = "cantidadProducto";
+            // 
+            // pesoProducto
+            // 
+            this.pesoProducto.HeaderText = "Peso";
+            this.pesoProducto.Name = "pesoProducto";
+            // 
+            // precioProducto
+            // 
+            this.precioProducto.HeaderText = "Precio";
+            this.precioProducto.Name = "precioProducto";
+            this.precioProducto.ReadOnly = true;
+            // 
+            // subtotalProducto
+            // 
+            this.subtotalProducto.HeaderText = "Subtotal";
+            this.subtotalProducto.Name = "subtotalProducto";
+            this.subtotalProducto.ReadOnly = true;
+            // 
+            // descuentoProducto
+            // 
+            this.descuentoProducto.HeaderText = "Descuento(%)";
+            this.descuentoProducto.Name = "descuentoProducto";
+            // 
+            // totalProducto
+            // 
+            this.totalProducto.HeaderText = "Total";
+            this.totalProducto.Name = "totalProducto";
+            this.totalProducto.ReadOnly = true;
             // 
             // buttonGenerarFactura
             // 
@@ -210,55 +256,8 @@
             this.labelCampoTelf.Size = new System.Drawing.Size(0, 13);
             this.labelCampoTelf.TabIndex = 16;
             // 
-            // codigoProducto
-            // 
-            this.codigoProducto.HeaderText = "Código";
-            this.codigoProducto.Name = "codigoProducto";
-            // 
-            // descripcionProducto
-            // 
-            this.descripcionProducto.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.descripcionProducto.HeaderText = "Descripción";
-            this.descripcionProducto.Name = "descripcionProducto";
-            this.descripcionProducto.ReadOnly = true;
-            this.descripcionProducto.Width = 500;
-            // 
-            // cantidadProducto
-            // 
-            this.cantidadProducto.HeaderText = "Cantidad";
-            this.cantidadProducto.Name = "cantidadProducto";
-            // 
-            // pesoProducto
-            // 
-            this.pesoProducto.HeaderText = "Peso";
-            this.pesoProducto.Name = "pesoProducto";
-            // 
-            // precioProducto
-            // 
-            this.precioProducto.HeaderText = "Precio";
-            this.precioProducto.Name = "precioProducto";
-            this.precioProducto.ReadOnly = true;
-            // 
-            // subtotalProducto
-            // 
-            this.subtotalProducto.HeaderText = "Subtotal";
-            this.subtotalProducto.Name = "subtotalProducto";
-            this.subtotalProducto.ReadOnly = true;
-            // 
-            // descuentoProducto
-            // 
-            this.descuentoProducto.HeaderText = "Descuento(%)";
-            this.descuentoProducto.Name = "descuentoProducto";
-            // 
-            // totalProducto
-            // 
-            this.totalProducto.HeaderText = "Total";
-            this.totalProducto.Name = "totalProducto";
-            this.totalProducto.ReadOnly = true;
-            // 
             // Form1
             // 
-            this.AcceptButton = this.buttonGenerarFactura;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1264, 681);
@@ -280,7 +279,6 @@
             this.Controls.Add(this.dataGridViewProducto);
             this.Name = "Form1";
             this.Text = "Form1";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProducto)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

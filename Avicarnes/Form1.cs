@@ -99,6 +99,8 @@ namespace Avicarnes
                              cliente.getEstado()  + " " + cliente.getDireccion() + " " +
                              cliente.getTelf());
             MessageBox.Show(factura.Id.ToString()  + " " + factura.Fecha);
+            string[] a = { "codigo", "descripcione", "1", "2", "3", "4", "5","6" };
+            dataGridViewProducto.Rows.Add(a);
         }
     }
 }
