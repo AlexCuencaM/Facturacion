@@ -19,7 +19,7 @@ namespace DAO
         /// <param name="id">id del cliente </param>
         /// <param name="nombre">Nombre del cliente</param>
         /// <returns></returns>
-        public abstract OracleCommand selectCliente(int? id, string nombre);
+        public abstract OracleCommand selectCliente <X,T>(X campo, T campo2);
         /// <summary>
         /// Inicialilzar los datos de un objeto mediante la BD
         /// </summary>
@@ -30,7 +30,7 @@ namespace DAO
         /// </summary>
         public abstract void limpiar();
 
-        public void select(int? id, string nombre)
+        public void select<X,T>(X id, T nombre)
         {
             conexion.Open();
             OracleCommand cmd = selectCliente(id,nombre);
@@ -49,6 +49,7 @@ namespace DAO
 
             reader.Close();
             conexion.Close();
-        }        
+        }
+
     }
 }

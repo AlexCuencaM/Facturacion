@@ -31,7 +31,7 @@ namespace DAO
             factura.DireccionEmpresa = reader.GetString(1);
         }
 
-        public override OracleCommand selectCliente(int? id, string nombre)
+        public override OracleCommand selectCliente<X, T>(X id, T nombre)
         {
             OracleCommand orcl = new OracleCommand("datos_empresa_pk.SELECTEMPRESA", Conexion);
             orcl.CommandType = CommandType.StoredProcedure;

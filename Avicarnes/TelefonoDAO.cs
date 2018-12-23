@@ -14,7 +14,7 @@ namespace DAO
             Conexion = cn;
         }    
         
-        public virtual OracleCommand selectCliente(string procedure, int? id, string nombre)
+        public OracleCommand selectCliente(string procedure, int? id, string nombre)
         {
             OracleCommand orcl = new OracleCommand(procedure, Conexion);
             orcl.CommandType = CommandType.StoredProcedure;
@@ -39,9 +39,18 @@ namespace DAO
         {
             Persona.setDatosTelefono(reader.GetString(0));
         }
-        public override OracleCommand selectCliente(int? id, string nombre)
+
+        /// <summary>
+        /// Obtiene los telefono(s) del cliente de la BD
+        /// </summary>
+        /// <typeparam name="X">Entero</typeparam>
+        /// <typeparam name="T">string</typeparam>
+        /// <param name="id">Id del cliente</param>
+        /// <param name="nombre">Nombre del cliente</param>
+        /// <returns></returns>
+        public override OracleCommand selectCliente<X,T>(X id, T nombre)
         {
-            return selectCliente("operaciones_cliente_pk.SELECTTELEFONOCLIENTE", id, nombre);
+            return selectCliente("operaciones_cliente_pk.SELECTTELEFONOCLIENTE", System.Convert.ToInt32(id),nombre.ToString());
         }
 
         public List<string> getTelf()

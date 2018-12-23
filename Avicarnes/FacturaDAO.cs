@@ -1,7 +1,6 @@
 ﻿using System.Data;
 using Avicarnes;
 using Oracle.ManagedDataAccess.Client;
-
 namespace DAO
 {
 
@@ -22,10 +21,11 @@ namespace DAO
             factura.Fecha = reader.GetString(1);
         }
 
-        public override OracleCommand selectCliente(int? id = 0, string nombre = "")
+        public override OracleCommand selectCliente<X, T>(X id, T nombre)
         {
             return selectCliente("factura_pk.selectheader");
         }
+
         public override void limpiar()
         {
             factura.Id = 0;

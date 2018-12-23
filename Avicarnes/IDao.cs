@@ -2,6 +2,6 @@
 {
     public interface IDao
     {
-        void select(int? id, string nombre);
+        void select<X,T>(X campo, T campo2);        
     }
 }

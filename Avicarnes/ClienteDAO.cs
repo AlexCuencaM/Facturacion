@@ -13,9 +13,9 @@ namespace DAO
             Conexion = cn;
         }       
        
-        public override OracleCommand selectCliente(int? id, string nombre)
+        public override OracleCommand selectCliente<X,T>(X id, T nombre)
         {
-            return selectCliente("operaciones_cliente_pk.SELECTCLIENTE", id, nombre);
+            return selectCliente("operaciones_cliente_pk.SELECTCLIENTE", System.Convert.ToInt32(id), nombre.ToString());
         }
 
         public override void limpiar()
