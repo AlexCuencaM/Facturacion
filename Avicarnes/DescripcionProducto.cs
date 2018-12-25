@@ -6,23 +6,23 @@ using System.Threading.Tasks;
 
 namespace Avicarnes
 {
-    class DescripcionProducto
+    public class DescripcionProducto
     {
         private Producto numeroSerie;
         private string descripcion;
-        private double precio;
+        private decimal precio;
         private double peso;
-
-        public DescripcionProducto(string descripcion, double precio, double peso)
+        private decimal subtotal;
+        public DescripcionProducto(string descripcion, decimal precio)
         {
             Descripcion = descripcion;
-            Precio = precio;
-            Peso = peso;
+            Precio = precio;            
         }
 
         public double Peso { get => peso; set => peso = value; }
-        public double Precio { get => precio; set => precio = value; }
+        public decimal Precio { get => precio; set => precio = value; }
         public string Descripcion { get => descripcion; set => descripcion = value; }
+        public decimal Subtotal { get => subtotal; set => subtotal = value; }
         public Producto NumeroSerie { get => numeroSerie; set => numeroSerie = value; }
 
         public void crearProducto(int id)

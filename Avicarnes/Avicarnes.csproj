@@ -71,7 +71,6 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Iproducto.cs" />
     <Compile Include="LineaProducto.cs" />
     <Compile Include="Busqueda.cs" />
     <Compile Include="Pago.cs" />
@@ -79,7 +78,6 @@
     <Compile Include="ParametrosOracle.cs" />
     <Compile Include="Pedido.cs" />
     <Compile Include="Plantilla.cs" />
-    <Compile Include="PlantillaPadre.cs" />
     <Compile Include="Producto.cs" />
     <Compile Include="ProductoDAO.cs" />
     <Compile Include="Program.cs" />

@@ -8,16 +8,16 @@ namespace Avicarnes
 {
     public class LineaProducto
     {
-        private double subtotal;
+        
         private int cantidad;
         private int descuento;
-        private double totalProducto;
+        private decimal totalProducto;
         private DescripcionProducto producto;
 
-        public double Subtotal { get => subtotal; set => subtotal = value; }
+        
         public int Cantidad { get => cantidad; set => cantidad = value; }
         public int Descuento { get => descuento; set => descuento = value; }
-        public double TotalProducto { get => totalProducto; set => totalProducto = value; }
+        public decimal TotalProducto { get => totalProducto; set => totalProducto = value; }
 
         public LineaProducto(int cantidad, int descuento)
         {
@@ -25,33 +25,32 @@ namespace Avicarnes
             Descuento = descuento;
         }
 
-        public LineaProducto(int cantidad,double subtotal)
+        public LineaProducto(DescripcionProducto product)
         {
-            Cantidad = cantidad;
-            Subtotal = subtotal;
+            producto = product;
+            
         }
 
-        public LineaProducto(int cantidad, int descuento, double subtotal, double total)
+        public LineaProducto(int cantidad, int descuento, decimal total)
         {
             Cantidad = cantidad;
-            Descuento = descuento;
-            Subtotal = subtotal;
+            Descuento = descuento;            
             TotalProducto = total;
         }
 
-        public double getPrecio()
+        public decimal getPrecio()
         {
             return producto.Precio;
         }
 
-        public double getPeso()
+        public decimal getPeso()
         {
             return producto.Precio;
         }
 
-        public void crearDescripcionProducto(string descripcion, double precio, double peso)
+        public void crearDescripcionProducto(string descripcion, decimal precio)
         {
-            producto = new DescripcionProducto(descripcion, precio, peso);
+            producto = new DescripcionProducto(descripcion, precio);
         }
 
     }

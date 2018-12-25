@@ -10,11 +10,11 @@ namespace Avicarnes
     {
         private Cliente cliente;
         private List<LineaProducto> producto;
-        private double totalVenta;
+        private decimal totalVenta;
         private Factura factura;
         public List<LineaProducto> Producto { get => producto; set => producto = value; }
         public Factura Factura { get => factura; set => factura = value; }
-        public double TotalVenta { get => totalVenta; set => totalVenta = value; }
+        public decimal TotalVenta { get => totalVenta; set => totalVenta = value; }
         public Cliente Cliente { get => cliente; set => cliente = value; }
 
         public void crearCliente()
