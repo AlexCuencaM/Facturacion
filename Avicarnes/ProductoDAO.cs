@@ -7,9 +7,7 @@ using System.Windows.Forms;
 namespace DAO
 {
     public class ProductoDAO:SubPlantilla
-    {        
-        
-
+    {              
         public ProductoDAO(OracleConnection conexion, int id)
         {
             Param = new ParametrosOracle();

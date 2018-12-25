@@ -20,14 +20,8 @@ namespace Avicarnes
         protected override void presentarData(Plantilla dato)
         {
             SubPlantilla product = (SubPlantilla)dato;
-            if (!String.IsNullOrEmpty(campo.Cells[0].Value.ToString() ) )
-            //{
-                /*product.select(Convert.ToInt32(campo.Cells[0].Value), "NA");
-                campo.Cells[1].Value = product.Lista.Last().getDescripcion();
-                campo.Cells[4].Value = product.Lista.Last().getPrecio();
-                lineaProducto = product.Lista;*/
-                asignarValor(product);
-            //}          
+            if (!String.IsNullOrEmpty(campo.Cells[0].Value.ToString() ) )            
+                asignarValor(product);            
         }
         private void asignarValor(SubPlantilla subPlantilla)
         {

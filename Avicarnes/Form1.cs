@@ -21,6 +21,7 @@ namespace Avicarnes
         {
             conexion = new OracleConnection("DATA SOURCE=localhost:1521/XE;PERSIST SECURITY INFO=True;USER ID=ADMINISTRADOR;PASSWORD=avicarnes");            
             factura = new Factura();
+            
             InitializeComponent();
         }
 
@@ -40,6 +41,7 @@ namespace Avicarnes
             catch (FormatException)
             {
                 operacionesDeExcepcion();
+                textBoxIdCliente.Text = "";
             }           
         }
 
@@ -60,7 +62,7 @@ namespace Avicarnes
         private void operacionesDeExcepcion()
         {
             MessageBox.Show("Escriba números");
-            textBoxIdCliente.Text = "";
+            
             conexion.Close();
         }
 
@@ -102,9 +104,7 @@ namespace Avicarnes
             string[] a = { "codigo", "descripcione", "1", "2", "3", "4", "5","6" };
             dataGridViewProducto.Rows.Add(a);
         }
-
         
-
         private void dataGridViewProducto_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             dataGridViewProducto.CurrentRow.Cells[6].ReadOnly = true;
@@ -113,32 +113,43 @@ namespace Avicarnes
                 case 0://Codigo, RF-008
                     codigo();
                     break;
-                //case 2://Cantidad                    
-                case 3://Peso
+                
+                case 3://Peso, RF-009
                     subtotal();
                     
                     break;
-                case 6://Porcentaje
+                case 6://Porcentaje, RF-010
                     total();                    
                     break;
-                default:
-                    //MessageBox.Show("Pusheen");
+                default:                    
                     break;
 
             }
         }
+
         private void codigo()
         {
-            CargaDeDatos<DataGridViewRow> cargarProducto = new CargaDeProducto(dataGridViewProducto.CurrentRow);           
-            SubPlantilla product = new ProductoDAO(conexion, Convert.ToInt32(dataGridViewProducto.CurrentRow.Cells[0].Value));
-            cargarProducto.cargar(product);            
+            try
+            {
+                CargaDeDatos<DataGridViewRow> cargarProducto = new CargaDeProducto(dataGridViewProducto.CurrentRow);
+                SubPlantilla product = new ProductoDAO(conexion, Convert.ToInt32(dataGridViewProducto.CurrentRow.Cells[0].Value));
+                cargarProducto.cargar(product);
+            }
+            catch(FormatException)
+            {
+                operacionesDeExcepcion();
+                dataGridViewProducto.CurrentRow.Cells[0].Value = "";
+            }
+            
         }
+
         private void subtotal()
         {
             //Validar
             dataGridViewProducto.CurrentRow.Cells[6].ReadOnly = false;
             dataGridViewProducto.CurrentRow.Cells[5].Value = "$10.00";
         }
+
         private void total()
         {
             dataGridViewProducto.CurrentRow.Cells[7].Value = "$12.00";
