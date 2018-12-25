@@ -22,7 +22,7 @@ namespace DAO
         {
             Persona.Cliente.limpiar();
         }
-        public override void setDatosCliente(OracleDataReader reader)
+        protected override void setDatosCliente(OracleDataReader reader)
         {
             Persona.setDatosCliente(reader.GetInt32(0), reader.GetString(1), reader.GetString(2),reader.GetString(3));
         }

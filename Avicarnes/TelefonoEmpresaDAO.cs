@@ -26,7 +26,7 @@ namespace DAO
             return selectCliente("datos_Empresa_pk.SELECTTELEFONOEMPRESA");
         }
 
-        public override void setDatosCliente(OracleDataReader reader)
+        protected override void setDatosCliente(OracleDataReader reader)
         {
             base.setDatosCliente(reader);
         }

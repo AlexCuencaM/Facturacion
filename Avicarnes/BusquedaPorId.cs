@@ -3,7 +3,7 @@ using System.Windows.Forms;
 using DAO;
 namespace Avicarnes
 {
-    public class BusquedaPorId : Busqueda
+    public class BusquedaPorId : BusquedaDual
     {
         public BusquedaPorId(TextBox id, DelegadoCliente client) : base(id, client) { }
         /// <summary>

@@ -25,7 +25,7 @@ namespace DAO
         {
         }
         
-        public override void setDatosCliente(OracleDataReader reader)
+        protected override void setDatosCliente(OracleDataReader reader)
         {
             factura.NombreEmpresa = reader.GetString(0);
             factura.DireccionEmpresa = reader.GetString(1);

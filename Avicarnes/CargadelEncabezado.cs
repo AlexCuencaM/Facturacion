@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using DAO;
 namespace Avicarnes
 {
-    public class CargaDelEncabezado:CargaDeDatos
+    public sealed class CargaDelEncabezado:CargaDeDatos<Label>
     {
         
         private Label fecha;
@@ -17,7 +17,7 @@ namespace Avicarnes
 
         public Factura Factura => factura;
 
-        public override void presentarData(Plantilla dato)
+        protected override void presentarData(Plantilla dato)
         {
             FacturaDAO factura = (FacturaDAO)dato;
             campo.Text = "Nota de Venta:\n\n" + " " + factura.Factura.Id;

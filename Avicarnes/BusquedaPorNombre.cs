@@ -3,7 +3,7 @@ using DAO;
 namespace Avicarnes
 {
     
-    public class BusquedaPorNombre : Busqueda
+    public class BusquedaPorNombre : BusquedaDual
     {
 
         public BusquedaPorNombre(TextBox nombre, DelegadoCliente client) : base(nombre, client){}

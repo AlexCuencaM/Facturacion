@@ -13,10 +13,10 @@ namespace Avicarnes
         private decimal precio;
         private double peso;
         private decimal subtotal;
-        public DescripcionProducto(string descripcion, decimal precio)
+        public void setValores(string descripcion, decimal precio)
         {
             Descripcion = descripcion;
-            Precio = precio;            
+            Precio = precio;
         }
 
         public double Peso { get => peso; set => peso = value; }

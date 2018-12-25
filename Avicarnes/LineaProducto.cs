@@ -18,6 +18,7 @@ namespace Avicarnes
         public int Cantidad { get => cantidad; set => cantidad = value; }
         public int Descuento { get => descuento; set => descuento = value; }
         public decimal TotalProducto { get => totalProducto; set => totalProducto = value; }
+        public DescripcionProducto Producto { get => producto; set => producto = value; }
 
         public LineaProducto(int cantidad, int descuento)
         {
@@ -47,10 +48,14 @@ namespace Avicarnes
         {
             return producto.Precio;
         }
-
-        public void crearDescripcionProducto(string descripcion, decimal precio)
+        public string getDescripcion()
         {
-            producto = new DescripcionProducto(descripcion, precio);
+            return producto.Descripcion;
+        }
+
+        public void crearDescripcionProducto()
+        {
+            producto = new DescripcionProducto();
         }
 
     }

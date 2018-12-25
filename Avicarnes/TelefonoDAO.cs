@@ -35,7 +35,7 @@ namespace DAO
         {
             Persona.LimpiarLista();
         }
-        public override void setDatosCliente(OracleDataReader reader)
+        protected override void setDatosCliente(OracleDataReader reader)
         {
             Persona.setDatosTelefono(reader.GetString(0));
         }

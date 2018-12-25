@@ -54,6 +54,7 @@
     <Compile Include="BusquedaPorNombre.cs" />
     <Compile Include="CargaDeDatos.cs" />
     <Compile Include="CargaDelEncabezado.cs" />
+    <Compile Include="CargaDeProducto.cs" />
     <Compile Include="CargarDatosEmpresa.cs" />
     <Compile Include="CargaTelefonoEmpresa.cs" />
     <Compile Include="ClienteDAO.cs" />
@@ -72,7 +73,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="LineaProducto.cs" />
-    <Compile Include="Busqueda.cs" />
+    <Compile Include="BusquedaDual.cs" />
     <Compile Include="Pago.cs" />
     <Compile Include="FacturaDAO.cs" />
     <Compile Include="ParametrosOracle.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="ProductoDAO.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SubPlantilla.cs" />
     <Compile Include="Telefono.cs" />
     <Compile Include="TelefonoDAO.cs" />
     <Compile Include="TelefonoEmpresaDAO.cs" />

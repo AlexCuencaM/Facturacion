@@ -12,7 +12,6 @@ namespace DAO
         public AccesoCliente Persona { get => persona; set => persona = value; }
         public ParametrosOracle Param { get => param; set => param = value; }
 
-
         /// <summary>
         /// Es un metodo que extrae la consulta dela BD
         /// </summary>
@@ -24,7 +23,7 @@ namespace DAO
         /// Inicialilzar los datos de un objeto mediante la BD
         /// </summary>
         /// <param name="reader">Lector de la consulta</param>
-        public abstract void setDatosCliente(OracleDataReader reader);
+        protected abstract void setDatosCliente(OracleDataReader reader);
         /// <summary>
         /// Borrar los datos establecidos por la BD del objeto
         /// </summary>

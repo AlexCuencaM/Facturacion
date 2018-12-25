@@ -3,10 +3,10 @@ using DAO;
 
 namespace Avicarnes
 {
-    public abstract class CargaDeDatos
+    public abstract class CargaDeDatos<T>
     {
-        protected Label campo;
-        public abstract void presentarData(Plantilla dato);
+        protected T campo;
+        protected abstract void presentarData(Plantilla dato);
         /// <summary>
         /// Presenta datos en la aplicación
         /// </summary>

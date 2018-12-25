@@ -52,7 +52,7 @@ namespace Avicarnes
         private void operacionDatosCliente(TextBox campo, TextBox campo2, BuscarPor criterio)
         {
             DelegadoCliente datosCliente = new DelegadoCliente(conexion);           
-            Busqueda search = FactoryDeBusqueda.crear(campo, datosCliente, criterio);
+            BusquedaDual search = FactoryDeBusqueda.crear(campo, datosCliente, criterio);
             datosCliente = search.buscarCliente(datosCliente);
             search.asignacionDeCampos(labelDireccionCliente, labelEstadoDePago, labelTelefono, campo2);
             cliente = datosCliente;//Asignacion de los datos de cliente 
@@ -76,20 +76,20 @@ namespace Avicarnes
         private void loadHeader()
         {
             CargaDelEncabezado fact = new CargaDelEncabezado(labelIdPedido, labelFecha);
-            CargaDeDatos factura = fact;
+            CargaDeDatos<Label> factura = fact;
             factura.cargar(new FacturaDAO(conexion, this.factura));
             this.factura = fact.Factura; // Para asignar valores de factura.
         }      
 
         private void cargarDatosEmpresa()
         {
-            CargaDeDatos empresa = new CargarDatosEmpresa(labelNombreEmpresa, labelDireccionEmpresa);
+            CargaDeDatos<Label> empresa = new CargarDatosEmpresa(labelNombreEmpresa, labelDireccionEmpresa);
             empresa.cargar(new EmpresaDAO(conexion, factura));                      
         }
 
         private void cargarTelf()
         {
-            CargaDeDatos telefono = new CargaTelefonoEmpresa(labelTelfonoDeEmpresa);
+            CargaDeDatos<Label> telefono = new CargaTelefonoEmpresa(labelTelfonoDeEmpresa);
             telefono.cargar(new TelefonoEmpresaDAO(conexion));            
         }               
         private void buttonGenerarFactura_Click(object sender, EventArgs e)
@@ -122,15 +122,16 @@ namespace Avicarnes
                     total();                    
                     break;
                 default:
-                    MessageBox.Show("Pusheen");
+                    //MessageBox.Show("Pusheen");
                     break;
 
             }
         }
         private void codigo()
         {
-            dataGridViewProducto.CurrentRow.Cells[1].Value = "!/4 DE POLLO";
-            dataGridViewProducto.CurrentRow.Cells[4].Value = "$10.00";
+            CargaDeDatos<DataGridViewRow> cargarProducto = new CargaDeProducto(dataGridViewProducto.CurrentRow);           
+            SubPlantilla product = new ProductoDAO(conexion, Convert.ToInt32(dataGridViewProducto.CurrentRow.Cells[0].Value));
+            cargarProducto.cargar(product);            
         }
         private void subtotal()
         {

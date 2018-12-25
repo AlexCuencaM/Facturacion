@@ -12,7 +12,7 @@ namespace Avicarnes
         /// <param name="cliente">Objeto a modificar</param>
         /// <param name="criterio">Parametro que diferencia el tipo de busqueda</param>
         /// <returns></returns>
-        public static Busqueda crear(TextBox campo,DelegadoCliente cliente,BuscarPor criterio)
+        public static BusquedaDual crear(TextBox campo,DelegadoCliente cliente,BuscarPor criterio)
         {
             switch(criterio)
             {

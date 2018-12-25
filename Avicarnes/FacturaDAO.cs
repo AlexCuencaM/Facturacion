@@ -15,7 +15,7 @@ namespace DAO
             Conexion = cn;
             this.factura = factura;
         }     
-        public override void setDatosCliente(OracleDataReader reader)
+        protected override void setDatosCliente(OracleDataReader reader)
         {
             factura.Id = reader.GetInt32(0);
             factura.Fecha = reader.GetString(1);

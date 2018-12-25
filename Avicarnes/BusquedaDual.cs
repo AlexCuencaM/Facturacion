@@ -3,7 +3,7 @@ using System.Windows.Forms;
 using DAO;
 namespace Avicarnes
 {
-    public abstract class Busqueda
+    public abstract class BusquedaDual
     {
         private TextBox campo;
         private DelegadoCliente cliente;
@@ -12,8 +12,8 @@ namespace Avicarnes
         /// </summary>
         /// <param name="criterioBusqueda">nombre o id</param>
         /// <param name="cliente"></param>
-        public Busqueda(TextBox criterioBusqueda, DelegadoCliente cliente)
-        {            
+        public BusquedaDual(TextBox criterioBusqueda, DelegadoCliente cliente)
+        {                        
             campo = criterioBusqueda;
             Cliente = cliente;
         }

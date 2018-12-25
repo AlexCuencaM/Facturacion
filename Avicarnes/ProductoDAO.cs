@@ -3,56 +3,60 @@ using System.Data;
 using System.Linq;
 using System.Collections.Generic;
 using Avicarnes;
-
+using System.Windows.Forms;
 namespace DAO
 {
-    public class ProductoDAO:Plantilla
-    {
-        private List<LineaProducto> lista;
-        private DescripcionProducto product;
-        private int id;
-        protected DescripcionProducto Product { get => product; set => product = value; }
+    public class ProductoDAO:SubPlantilla
+    {        
+        
 
-        public ProductoDAO(int id)
+        public ProductoDAO(OracleConnection conexion, int id)
         {
-            lista = new List<LineaProducto>();
-            this.id = id;
+            Param = new ParametrosOracle();
+            Lista = new HashSet<LineaProducto>();
+            Product = new DescripcionProducto();
+            Product.crearProducto(id);            
+            Conexion = conexion;
         }
 
         public override void limpiar()
         {
-            lista.RemoveAt(lista.Count - 1);
-            Product = null;
+            Product.setValores("", 0);
+            
+            Lista.Add(new LineaProducto(Product));   
         }
         /// <summary>
-        /// Elabora una operacion para el subtotal
+        /// Elabora una consulta que busca un producto por su código
         /// </summary>
         /// <typeparam name="X">decimal</typeparam>
-        /// <typeparam name="T">double</typeparam>
+        /// <typeparam name="T">NA</typeparam>
         /// <param name="precio">Precio del producto</param>
         /// <param name="peso">Peso del prodcuto</param>
         /// <returns></returns>
-        public override OracleCommand selectCliente<X, T>(X id, T peso)
-        {
+        public override OracleCommand selectCliente<X, T>(X id, T na)
+        {            
             return selectProducto("operaciones_producto_pk.select_producto", System.Convert.ToInt32(id));
         }
 
-        public override void setDatosCliente(OracleDataReader reader)
+        protected override void setDatosCliente(OracleDataReader reader)
         {
-            product = new DescripcionProducto(reader.GetString(0),reader.GetDecimal(1));
-            product.NumeroSerie.Id = id;
-            lista.Add(new LineaProducto(product));            
+            Product.setValores(reader.GetString(0),reader.GetDecimal(1));                   
+            Lista.Add(new LineaProducto(Product));            
         }
-        public OracleCommand selectProducto(string procedure, int? id)
+
+        private OracleCommand setParamsValueSelect(OracleCommand cmd, int id)
+        {
+            cmd.Parameters[1].Value = id;            
+            return cmd;
+        }
+
+        public OracleCommand selectProducto(string procedure, int id)
         {
             OracleCommand orcl = new OracleCommand(procedure, Conexion);
             orcl.CommandType = CommandType.StoredProcedure;
             orcl.Parameters.Add(Param.getFuncionRef());
-            orcl.Parameters.Add(Param.getParam("pn_id", DbType.Int32));            
-            return orcl;
+            orcl.Parameters.Add(Param.getParam("PN_ID", DbType.Int32));           
+            return setParamsValueSelect(orcl,id);
         }
-
-
-
     }
 }
