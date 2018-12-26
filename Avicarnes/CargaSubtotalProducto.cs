@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using DAO;
 
@@ -17,11 +14,10 @@ namespace Avicarnes
         }
         protected override void presentarData(Plantilla dato)
         {
-            SubPlantilla product = (SubPlantilla)dato;            
-            if (!String.IsNullOrEmpty(campo.Cells[3].Value.ToString()))
-            {                
-                asignarValor((SubPlantilla)dato);
-            }
+            SubPlantilla product = (SubPlantilla)dato;
+            if (campo.Cells[3].Value != null)
+                if (!String.IsNullOrEmpty(campo.Cells[3].Value.ToString()))                          
+                    asignarValor((SubPlantilla)dato);                       
                 
         }
         protected override void asignarValor(SubPlantilla subPlantilla)

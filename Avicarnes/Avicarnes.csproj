@@ -56,6 +56,7 @@
     <Compile Include="CargaDelEncabezado.cs" />
     <Compile Include="CargaDeProducto.cs" />
     <Compile Include="CargarDatosEmpresa.cs" />
+    <Compile Include="CargarTotalProducto.cs" />
     <Compile Include="CargaSubtotalProducto.cs" />
     <Compile Include="CargaTelefonoEmpresa.cs" />
     <Compile Include="ClienteDAO.cs" />
@@ -89,6 +90,7 @@
     <Compile Include="Telefono.cs" />
     <Compile Include="TelefonoDAO.cs" />
     <Compile Include="TelefonoEmpresaDAO.cs" />
+    <Compile Include="TotalProductoDAO.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

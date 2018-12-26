@@ -18,8 +18,9 @@ namespace Avicarnes
         protected override void presentarData(Plantilla dato)
         {
             SubPlantilla product = (SubPlantilla)dato;
-            if (!String.IsNullOrEmpty(campo.Cells[0].Value.ToString() ) )            
-                asignarValor(product);            
+            if(campo.Cells[0].Value != null)
+                if (!String.IsNullOrEmpty(campo.Cells[0].Value.ToString()))            
+                    asignarValor(product);            
         }
         protected virtual void asignarValor(SubPlantilla subPlantilla)
         {

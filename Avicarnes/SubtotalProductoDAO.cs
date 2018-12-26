@@ -1,20 +1,15 @@
 ﻿using System.Data;
 using System.Collections.Generic;
-using System.Windows.Forms;
 using Oracle.ManagedDataAccess.Client;
 using Avicarnes;
 namespace DAO
 {
-    public class SubtotalProductoDAO : SubPlantilla
+    public class SubtotalProductoDAO : ProductoDAO
     {
         
 
-        public SubtotalProductoDAO(OracleConnection conexion) 
-        {
-            Param = new ParametrosOracle();
-            Lista = new HashSet<LineaProducto>();
-            Product = new DescripcionProducto();
-            Conexion = conexion;
+        public SubtotalProductoDAO(OracleConnection conexion):base(conexion)
+        {            
 
         }
         public override void limpiar()
@@ -28,7 +23,7 @@ namespace DAO
                 System.Convert.ToDouble(peso), System.Convert.ToDecimal(precio));
         }
 
-        public OracleCommand selectSubtotal(string procedure, double peso, decimal precio)
+        public OracleCommand selectSubtotal(string procedure, double? peso, decimal precio)
         {
             OracleCommand orcl = new OracleCommand(procedure, Conexion);
             orcl.CommandType = CommandType.StoredProcedure;
@@ -43,7 +38,7 @@ namespace DAO
             Product.Subtotal = reader.GetDecimal(0);
             Lista.Add(new LineaProducto(Product));
         }
-        public OracleCommand setParamsValueSelect(OracleCommand orcl, double peso, decimal precio)
+        public OracleCommand setParamsValueSelect(OracleCommand orcl, double? peso, decimal precio)
         {            
             orcl.Parameters[1].Value = peso;
             orcl.Parameters[2].Value = precio;

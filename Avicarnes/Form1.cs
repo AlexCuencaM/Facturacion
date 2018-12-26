@@ -108,11 +108,12 @@ namespace Avicarnes
         private void dataGridViewProducto_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             int i = e.RowIndex;
-            dataGridViewProducto.CurrentRow.Cells[6].ReadOnly = true;
+            
             
             switch (e.ColumnIndex)
             {
                 case 0://Codigo, RF-008
+                    dataGridViewProducto.CurrentRow.Cells[6].ReadOnly = true;
                     codigo();
                     break;
                 
@@ -159,14 +160,20 @@ namespace Avicarnes
             CargaDeDatos<DataGridViewRow> cargarSubtotal = new CargaSubtotalProducto(dataGridViewProducto.CurrentRow);
             SubPlantilla producto = new SubtotalProductoDAO(conexion);
             cargarSubtotal.cargar(producto);
-            dataGridViewProducto.CurrentRow.Cells[6].ReadOnly = false;            
-            
-            //dataGridViewProducto.CurrentRow.Cells[5].Value = "$10.00";
+
+            CargaDeDatos<DataGridViewRow> cargartotal = new CargarTotalProducto(dataGridViewProducto.CurrentRow);
+            SubPlantilla product = new TotalProductoDAO(conexion);
+            cargartotal.cargar(product);
+
+            dataGridViewProducto.CurrentRow.Cells[6].ReadOnly = false;                                    
         }
 
         private void total()
         {
-            dataGridViewProducto.CurrentRow.Cells[7].Value = "$12.00";
+            CargaDeDatos<DataGridViewRow> cargartotal = new CargarTotalProducto(dataGridViewProducto.CurrentRow);
+            SubPlantilla producto = new TotalProductoDAO(conexion);
+            cargartotal.cargar(producto);
+            //dataGridViewProducto.CurrentRow.Cells[7].Value = "$12.00";
         }
     }
 }
