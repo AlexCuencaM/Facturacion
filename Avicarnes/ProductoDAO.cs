@@ -16,15 +16,15 @@ namespace DAO
         public ProductoDAO(OracleConnection connection)
         {
             Param = new ParametrosOracle();
-            Lista = new HashSet<LineaProducto>();
+            Lista = new LineaProducto();
             Product = new DescripcionProducto();
             Conexion = connection;
         }
 
         public override void limpiar()
         {
-            Product.setValores("", 0);            
-            Lista.Add(new LineaProducto(Product));   
+            Product.setValores("", 0);
+            Lista = new LineaProducto(Product);
         }
         /// <summary>
         /// Elabora una consulta que busca un producto por su código
@@ -41,8 +41,9 @@ namespace DAO
 
         protected override void setDatosCliente(OracleDataReader reader)
         {
-            Product.setValores(reader.GetString(0),reader.GetDecimal(1));                   
-            Lista.Add(new LineaProducto(Product));            
+            Product.setValores(reader.GetString(0),reader.GetDecimal(1));
+            Lista.agregarDescripcionProducto(Product);
+            
         }
 
         private OracleCommand setParamsValueSelect(OracleCommand cmd, int id)

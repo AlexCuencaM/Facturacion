@@ -35,6 +35,10 @@ namespace Avicarnes
         {
             TotalProducto = total;
         }
+        public LineaProducto()
+        {
+
+        }
         public LineaProducto(int cantidad, int descuento, decimal total)
         {
             Cantidad = cantidad;
@@ -60,7 +64,10 @@ namespace Avicarnes
         {
             producto = new DescripcionProducto();
         }
-
+        public void agregarDescripcionProducto(DescripcionProducto pro)
+        {
+            producto = pro;
+        }
     }
 }
  

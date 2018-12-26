@@ -28,16 +28,14 @@ namespace DAO
             OracleCommand orcl = new OracleCommand(procedure, Conexion);
             orcl.CommandType = CommandType.StoredProcedure;
             orcl.Parameters.Add(Param.getFuncionRef());
-            orcl.Parameters.Add(Param.getParam("PN_PESO", DbType.Int32));
-            orcl.Parameters.Add(Param.getParam("PN_PRECIO", DbType.Decimal));
+            orcl.Parameters.Add(Param.getParam("PN_descuento", DbType.Int32));
+            orcl.Parameters.Add(Param.getParam("PN_subtotal", DbType.Decimal));
             return setParamsValueSelect(orcl, descuento, subtotal);
         }
 
         protected override void setDatosCliente(OracleDataReader reader)
         {
-            LineaProducto producto = new LineaProducto(reader.GetDecimal(0));
-            Lista.Add(producto);
-            
+             Lista.TotalProducto = reader.GetDecimal(0);                        
         }
         public OracleCommand setParamsValueSelect(OracleCommand orcl, int? descuento, decimal subtotal)
         {

@@ -36,7 +36,7 @@ namespace DAO
         protected override void setDatosCliente(OracleDataReader reader)
         {           
             Product.Subtotal = reader.GetDecimal(0);
-            Lista.Add(new LineaProducto(Product));
+            Lista.agregarDescripcionProducto(Product);
         }
         public OracleCommand setParamsValueSelect(OracleCommand orcl, double? peso, decimal precio)
         {            

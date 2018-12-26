@@ -12,9 +12,21 @@ namespace Avicarnes
         /// <param name="id">Criterio de busqueda</param>
         /// <returns>Cliente con datos</returns>
         protected override DelegadoCliente seleccion(TextBox id)
-        {          
-            Cliente.select(id:Convert.ToInt32(id.Text));
+        {
+            try
+            {
+                Cliente.select(id: Convert.ToInt32(id.Text));
+                
+            }
+            catch(FormatException)
+            {
+                MessageBox.Show("Escriba numeros");
+                id.Text = "";
+                
+            }
             return Cliente;
+
+
         }
 
         /// <summary>

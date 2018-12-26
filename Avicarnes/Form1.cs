@@ -33,16 +33,9 @@ namespace Avicarnes
         
         private void textBoxIdCliente_TextChanged(object sender, EventArgs e)
         {
-            try
-            {
-                if (textBoxIdCliente.Focused)                 
-                    operacionDatosCliente(textBoxIdCliente, textBoxCliente,BuscarPor.ID);
-            }
-            catch (FormatException)
-            {
-                operacionesDeExcepcion();
-                textBoxIdCliente.Text = "";
-            }           
+           
+            if (textBoxIdCliente.Focused)                 
+                operacionDatosCliente(textBoxIdCliente, textBoxCliente,BuscarPor.ID);           
         }
 
         /// <summary>
@@ -126,10 +119,8 @@ namespace Avicarnes
                     break;
                 default:                    
                     break;
-
             }
         }
-
         private void codigo()
         {
             try
@@ -140,31 +131,24 @@ namespace Avicarnes
             {
                 operacionesDeExcepcion();
                 dataGridViewProducto.CurrentRow.Cells[0].Value = "";
-            }
-            
+            }            
         }
 
-        SubPlantilla product;
+        
         private void loadProducto()
         {
             CargaDeDatos<DataGridViewRow> cargarProducto = new CargaDeProducto(dataGridViewProducto.CurrentRow);
-            product = new ProductoDAO(conexion, Convert.ToInt32(dataGridViewProducto.CurrentRow.Cells[0].Value));            
+            SubPlantilla product = new ProductoDAO(conexion, Convert.ToInt32(dataGridViewProducto.CurrentRow.Cells[0].Value));            
             cargarProducto.cargar(product);
-
-            
+            subtotal();
+            total();
         }
-
         private void subtotal()
-        {
-            //Validar
+        {            
             CargaDeDatos<DataGridViewRow> cargarSubtotal = new CargaSubtotalProducto(dataGridViewProducto.CurrentRow);
             SubPlantilla producto = new SubtotalProductoDAO(conexion);
             cargarSubtotal.cargar(producto);
-
-            CargaDeDatos<DataGridViewRow> cargartotal = new CargarTotalProducto(dataGridViewProducto.CurrentRow);
-            SubPlantilla product = new TotalProductoDAO(conexion);
-            cargartotal.cargar(product);
-
+            total();
             dataGridViewProducto.CurrentRow.Cells[6].ReadOnly = false;                                    
         }
 
@@ -172,8 +156,7 @@ namespace Avicarnes
         {
             CargaDeDatos<DataGridViewRow> cargartotal = new CargarTotalProducto(dataGridViewProducto.CurrentRow);
             SubPlantilla producto = new TotalProductoDAO(conexion);
-            cargartotal.cargar(producto);
-            //dataGridViewProducto.CurrentRow.Cells[7].Value = "$12.00";
+            cargartotal.cargar(producto);            
         }
     }
 }

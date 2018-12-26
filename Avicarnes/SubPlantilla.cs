@@ -11,8 +11,8 @@ namespace DAO
     public abstract class SubPlantilla:Plantilla
     {
         private DescripcionProducto product;
-        private HashSet<LineaProducto> lista;
+        private LineaProducto lista;
         protected DescripcionProducto Product { get => product; set => product = value; }
-        public HashSet<LineaProducto> Lista { get => lista; set => lista = value; }
+        public LineaProducto Lista { get => lista; set => lista = value; }
     }
 }
