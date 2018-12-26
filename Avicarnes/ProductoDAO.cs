@@ -7,20 +7,23 @@ using System.Windows.Forms;
 namespace DAO
 {
     public class ProductoDAO:SubPlantilla
-    {              
-        public ProductoDAO(OracleConnection conexion, int id)
+    {
+        
+        public ProductoDAO(OracleConnection conexion, int id):this(conexion)
+        {            
+            Product.crearProducto(id);            
+        }
+        public ProductoDAO(OracleConnection connection)
         {
             Param = new ParametrosOracle();
             Lista = new HashSet<LineaProducto>();
             Product = new DescripcionProducto();
-            Product.crearProducto(id);            
-            Conexion = conexion;
+            Conexion = connection;
         }
 
         public override void limpiar()
         {
-            Product.setValores("", 0);
-            
+            Product.setValores("", 0);            
             Lista.Add(new LineaProducto(Product));   
         }
         /// <summary>

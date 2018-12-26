@@ -69,8 +69,8 @@ namespace Avicarnes
         private void Form1_Load(object sender, EventArgs e)
         {       
             loadHeader();
-            cargarDatosEmpresa();
-            cargarTelf();
+            loadDatosEmpresa();
+            loadTelf();
         }
         /// <summary>
         /// Cargar Los datos del encabezado a la aplicación
@@ -83,13 +83,13 @@ namespace Avicarnes
             this.factura = fact.Factura; // Para asignar valores de factura.
         }      
 
-        private void cargarDatosEmpresa()
+        private void loadDatosEmpresa()
         {
             CargaDeDatos<Label> empresa = new CargarDatosEmpresa(labelNombreEmpresa, labelDireccionEmpresa);
             empresa.cargar(new EmpresaDAO(conexion, factura));                      
         }
 
-        private void cargarTelf()
+        private void loadTelf()
         {
             CargaDeDatos<Label> telefono = new CargaTelefonoEmpresa(labelTelfonoDeEmpresa);
             telefono.cargar(new TelefonoEmpresaDAO(conexion));            
@@ -107,7 +107,9 @@ namespace Avicarnes
         
         private void dataGridViewProducto_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
+            int i = e.RowIndex;
             dataGridViewProducto.CurrentRow.Cells[6].ReadOnly = true;
+            
             switch (e.ColumnIndex)
             {
                 case 0://Codigo, RF-008
@@ -131,9 +133,7 @@ namespace Avicarnes
         {
             try
             {
-                CargaDeDatos<DataGridViewRow> cargarProducto = new CargaDeProducto(dataGridViewProducto.CurrentRow);
-                SubPlantilla product = new ProductoDAO(conexion, Convert.ToInt32(dataGridViewProducto.CurrentRow.Cells[0].Value));
-                cargarProducto.cargar(product);
+                loadProducto();
             }
             catch(FormatException)
             {
@@ -143,11 +143,25 @@ namespace Avicarnes
             
         }
 
+        SubPlantilla product;
+        private void loadProducto()
+        {
+            CargaDeDatos<DataGridViewRow> cargarProducto = new CargaDeProducto(dataGridViewProducto.CurrentRow);
+            product = new ProductoDAO(conexion, Convert.ToInt32(dataGridViewProducto.CurrentRow.Cells[0].Value));            
+            cargarProducto.cargar(product);
+
+            
+        }
+
         private void subtotal()
         {
             //Validar
-            dataGridViewProducto.CurrentRow.Cells[6].ReadOnly = false;
-            dataGridViewProducto.CurrentRow.Cells[5].Value = "$10.00";
+            CargaDeDatos<DataGridViewRow> cargarSubtotal = new CargaSubtotalProducto(dataGridViewProducto.CurrentRow);
+            SubPlantilla producto = new SubtotalProductoDAO(conexion);
+            cargarSubtotal.cargar(producto);
+            dataGridViewProducto.CurrentRow.Cells[6].ReadOnly = false;            
+            
+            //dataGridViewProducto.CurrentRow.Cells[5].Value = "$10.00";
         }
 
         private void total()

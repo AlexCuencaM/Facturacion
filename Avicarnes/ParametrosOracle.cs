@@ -22,6 +22,7 @@ namespace DAO
             param.IsNullable = true;
             return param;
         }
+       
         public OracleParameter getParam(string name, DbType type)
         {
             OracleParameter param = new OracleParameter();

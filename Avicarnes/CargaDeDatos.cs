@@ -13,7 +13,7 @@ namespace Avicarnes
         /// <param name="presentar"></param>
         public void cargar(Plantilla presentar)
         {
-            presentar.select(0, "");           
+            presentar.select(0, 0M);           
             presentarData(presentar);
         }                
     }

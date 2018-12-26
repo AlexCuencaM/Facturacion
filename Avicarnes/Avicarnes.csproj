@@ -56,6 +56,7 @@
     <Compile Include="CargaDelEncabezado.cs" />
     <Compile Include="CargaDeProducto.cs" />
     <Compile Include="CargarDatosEmpresa.cs" />
+    <Compile Include="CargaSubtotalProducto.cs" />
     <Compile Include="CargaTelefonoEmpresa.cs" />
     <Compile Include="ClienteDAO.cs" />
     <Compile Include="DelegadoCliente.cs" />
@@ -84,6 +85,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SubPlantilla.cs" />
+    <Compile Include="SubtotalProductoDAO.cs" />
     <Compile Include="Telefono.cs" />
     <Compile Include="TelefonoDAO.cs" />
     <Compile Include="TelefonoEmpresaDAO.cs" />
