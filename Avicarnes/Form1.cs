@@ -44,7 +44,7 @@ namespace Avicarnes
         /// <param name="campo">Campo que indica que tipo de busqueda instanciar</param>
         /// <param name="campo2">Campo que se rellena por la busqueda del parámetro campo</param>
         /// <param name="criterio">Puede ser nombre o id</param>
-        private void operacionDatosCliente(TextBox campo, TextBox campo2, BuscarPor criterio)
+        private void operacionDatosCliente(TextBox campo, TextBox campo2, BuscarPor criterio)//RF-002
         {
             DelegadoCliente datosCliente = new DelegadoCliente(conexion);           
             BusquedaDual search = FactoryDeBusqueda.crear(campo, datosCliente, criterio);
@@ -61,6 +61,7 @@ namespace Avicarnes
 
         private void Form1_Load(object sender, EventArgs e)
         {       
+            //RF-001
             loadHeader();
             loadDatosEmpresa();
             loadTelf();
@@ -157,6 +158,13 @@ namespace Avicarnes
             CargaDeDatos<DataGridViewRow> cargartotal = new CargarTotalProducto(dataGridViewProducto.CurrentRow);
             SubPlantilla producto = new TotalProductoDAO(conexion);
             cargartotal.cargar(producto);            
+        }
+
+        private void button1_Click(object sender, EventArgs e)//CU-005, RF-017
+        {
+            textBoxIdCliente.Text = "";
+            dataGridViewProducto.Rows.Clear();
+            operacionDatosCliente(textBoxIdCliente, textBoxCliente, BuscarPor.ID);
         }
     }
 }
