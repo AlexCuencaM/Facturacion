@@ -87,17 +87,35 @@ namespace Avicarnes
         {
             CargaDeDatos<Label> telefono = new CargaTelefonoEmpresa(labelTelfonoDeEmpresa);
             telefono.cargar(new TelefonoEmpresaDAO(conexion));            
-        }               
+        }     
+        
         private void buttonGenerarFactura_Click(object sender, EventArgs e)
-        {
-            
-            MessageBox.Show(cliente.getId().ToString() +  " " + cliente.getNombre() + " " +
-                             cliente.getEstado()  + " " + cliente.getDireccion() + " " +
-                             cliente.getTelf());
-            MessageBox.Show(factura.Id.ToString()  + " " + factura.Fecha);
-            string[] a = { "codigo", "descripcione", "1", "2", "3", "4", "5","6" };
-            dataGridViewProducto.Rows.Add(a);
+        {            
+            List<DescripcionProducto> productos = new List<DescripcionProducto>();
+            List<LineaProducto> productosL = new List<LineaProducto>();            
+            foreach (DataGridViewRow i in dataGridViewProducto.Rows)
+            {                
+                LineaProducto lista = new LineaProducto();
+                DescripcionProducto a = new DescripcionProducto();                
+                if (i.Cells[1].Value != null)
+                {
+                    a.crearProducto(Convert.ToInt32(i.Cells[0].Value) );                    
+                    a.Descripcion = i.Cells[1].Value.ToString();
+                    lista.Cantidad = Convert.ToInt32(i.Cells[2].Value);
+                    a.Peso = Convert.ToDouble(i.Cells[3].Value);
+                    a.Precio = Convert.ToDecimal(i.Cells[4].Value);
+                    a.Subtotal = Convert.ToDecimal(i.Cells[5].Value);
+                    lista.Descuento = Convert.ToInt32(i.Cells[6].Value);
+                    lista.TotalProducto = Convert.ToDecimal(i.Cells[7].Value);
+                    productos.Add(a);
+                    productosL.Add(lista);
+                }
+                
+            }            
+            Form2 b = new Form2(productos,productosL);
+            b.Show();          
         }
+
         
         private void dataGridViewProducto_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {

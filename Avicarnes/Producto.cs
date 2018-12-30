@@ -13,7 +13,7 @@ namespace Avicarnes
 
         public Producto(int id)
         {
-            Id = id;
+            this.id = id;
         }
     }
 }
