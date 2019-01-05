@@ -49,13 +49,12 @@ namespace Avicarnes
             DelegadoCliente datosCliente = new DelegadoCliente(conexion);           
             BusquedaDual search = FactoryDeBusqueda.crear(campo, datosCliente, criterio);
             datosCliente = search.buscarCliente(datosCliente);
-            search.asignacionDeCampos(labelDireccionCliente, labelEstadoDePago, labelTelefono, campo2);
-            cliente = datosCliente;//Asignacion de los datos de cliente 
+            search.asignacionDeCampos(labelDireccionCliente, labelEstadoDePago, labelTelefono, campo2);            
+            factura.Cliente = datosCliente.Persona().Cliente;
         }
         private void operacionesDeExcepcion()
         {
-            MessageBox.Show("Escriba números");
-            
+            MessageBox.Show("Escriba números");            
             conexion.Close();
         }
 
@@ -80,7 +79,7 @@ namespace Avicarnes
         private void loadDatosEmpresa()
         {
             CargaDeDatos<Label> empresa = new CargarDatosEmpresa(labelNombreEmpresa, labelDireccionEmpresa);
-            empresa.cargar(new EmpresaDAO(conexion, factura));                      
+            empresa.cargar(new EmpresaDAO(conexion, factura));           
         }
 
         private void loadTelf()
@@ -92,36 +91,30 @@ namespace Avicarnes
         private void buttonGenerarFactura_Click(object sender, EventArgs e)
         {            
             List<DescripcionProducto> productos = new List<DescripcionProducto>();
-            List<LineaProducto> productosL = new List<LineaProducto>();            
+            List<LineaProducto> lineaProductos = new List<LineaProducto>();
             foreach (DataGridViewRow i in dataGridViewProducto.Rows)
             {                
                 LineaProducto lista = new LineaProducto();
                 DescripcionProducto a = new DescripcionProducto();                
-                if (i.Cells[1].Value != null)
+                if (i.Cells[1].Value != null && i.Cells[3].Value != null)
                 {
-                    a.crearProducto(Convert.ToInt32(i.Cells[0].Value) );                    
-                    a.Descripcion = i.Cells[1].Value.ToString();
-                    lista.Cantidad = Convert.ToInt32(i.Cells[2].Value);
-                    a.Peso = Convert.ToDouble(i.Cells[3].Value);
-                    a.Precio = Convert.ToDecimal(i.Cells[4].Value);
-                    a.Subtotal = Convert.ToDecimal(i.Cells[5].Value);
-                    lista.Descuento = Convert.ToInt32(i.Cells[6].Value);
-                    lista.TotalProducto = Convert.ToDecimal(i.Cells[7].Value);
+                    a.crearProducto(Convert.ToInt32(i.Cells[0].Value) );
+
+                    a.setValores(i.Cells[1].Value.ToString(), Convert.ToDouble(i.Cells[3].Value),
+                        Convert.ToDecimal(i.Cells[4].Value), Convert.ToDecimal(i.Cells[5].Value));
+
+                    lista.setValores(Convert.ToInt32(i.Cells[2].Value), Convert.ToInt32(i.Cells[6].Value), Convert.ToDecimal(i.Cells[7].Value));
+
                     productos.Add(a);
-                    productosL.Add(lista);
-                }
-                
+                    lineaProductos.Add(lista);
+                }                
             }            
-            Form2 b = new Form2(productos,productosL);
+            Form2 b = new Form2(productos, lineaProductos, factura);
             b.Show();          
         }
-
         
         private void dataGridViewProducto_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-        {
-            int i = e.RowIndex;
-            
-            
+        {                        
             switch (e.ColumnIndex)
             {
                 case 0://Codigo, RF-008
@@ -139,25 +132,12 @@ namespace Avicarnes
                 default:                    
                     break;
             }
-        }
+        }        
+        
         private void codigo()
         {
-            try
-            {
-                loadProducto();
-            }
-            catch(FormatException)
-            {
-                operacionesDeExcepcion();
-                dataGridViewProducto.CurrentRow.Cells[0].Value = "";
-            }            
-        }
-
-        
-        private void loadProducto()
-        {
             CargaDeDatos<DataGridViewRow> cargarProducto = new CargaDeProducto(dataGridViewProducto.CurrentRow);
-            SubPlantilla product = new ProductoDAO(conexion, Convert.ToInt32(dataGridViewProducto.CurrentRow.Cells[0].Value));            
+            SubPlantilla product = new ProductoDAO(conexion,dataGridViewProducto.CurrentRow);            
             cargarProducto.cargar(product);
             subtotal();
             total();

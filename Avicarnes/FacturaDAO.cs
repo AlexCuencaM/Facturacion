@@ -15,13 +15,13 @@ namespace DAO
             Conexion = cn;
             this.factura = factura;
         }     
-        protected override void setDatosCliente(OracleDataReader reader)
+        protected override void setDatosCliente(OracleDataReader reader)//Solo es el id y la fecha
         {
             factura.Id = reader.GetInt32(0);
             factura.Fecha = reader.GetString(1);
         }
 
-        public override OracleCommand selectCliente<X, T>(X id, T nombre)
+        public override OracleCommand selectCliente<X, T>(X id, T nombre)//Parametros no usados
         {
             return selectCliente("factura_pk.selectheader");
         }

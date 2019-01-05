@@ -27,24 +27,20 @@ namespace DAO
             Persona.setDatosCliente(reader.GetInt32(0), reader.GetString(1), reader.GetString(2),reader.GetString(3));
         }
 
-
         private OracleCommand setParamsValueSelect(OracleCommand cmd, int? id, string nombre)
         {
             cmd.Parameters[1].Value = id;
             cmd.Parameters[2].Value = nombre;
             return cmd;
         }
-
         public OracleCommand selectCliente(string procedure,int? id, string nombre)
         {
             OracleCommand orcl = new OracleCommand(procedure, Conexion);
             orcl.CommandType = CommandType.StoredProcedure;
             orcl.Parameters.Add(Param.getFuncionRef());
             orcl.Parameters.Add(Param.getParam("PN_ID", DbType.Int32) ) ;
-            orcl.Parameters.Add(Param.getParam("PV_NOMBRE",DbType.String));
-
-            setParamsValueSelect(orcl, id, nombre);
-            return orcl;
+            orcl.Parameters.Add(Param.getParam("PV_NOMBRE",DbType.String));            
+            return setParamsValueSelect(orcl, id, nombre); ;
         }
     }
 }

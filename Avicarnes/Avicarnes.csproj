@@ -132,7 +132,9 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Report1.rdlc" />
+    <None Include="Cliente.datasource" />
     <None Include="DescripcionProducto.datasource" />
+    <None Include="Factura.datasource" />
     <None Include="LineaProducto.datasource" />
     <None Include="packages.config" />
     <None Include="Producto.datasource" />

@@ -25,7 +25,7 @@ namespace DAO
             return Persona().Cliente.Nombre;
         }
 
-        private AccesoCliente Persona()
+        public AccesoCliente Persona()
         {
             return sistemaBd.ClienteBd.Persona;
         }

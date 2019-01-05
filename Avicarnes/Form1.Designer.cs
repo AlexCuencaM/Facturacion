@@ -28,12 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridViewProducto = new System.Windows.Forms.DataGridView();
             this.codigoProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.descripcionProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -92,8 +90,8 @@
             // descripcionProducto
             // 
             this.descripcionProducto.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle1.NullValue = "NA";
-            this.descripcionProducto.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.NullValue = "NA";
+            this.descripcionProducto.DefaultCellStyle = dataGridViewCellStyle5;
             this.descripcionProducto.HeaderText = "Descripción";
             this.descripcionProducto.Name = "descripcionProducto";
             this.descripcionProducto.ReadOnly = true;
@@ -101,43 +99,39 @@
             // 
             // cantidadProducto
             // 
-            dataGridViewCellStyle2.NullValue = "0";
-            this.cantidadProducto.DefaultCellStyle = dataGridViewCellStyle2;
             this.cantidadProducto.HeaderText = "Cantidad";
             this.cantidadProducto.Name = "cantidadProducto";
             // 
             // pesoProducto
             // 
-            dataGridViewCellStyle3.NullValue = "0";
-            this.pesoProducto.DefaultCellStyle = dataGridViewCellStyle3;
             this.pesoProducto.HeaderText = "Peso";
             this.pesoProducto.Name = "pesoProducto";
             // 
             // precioProducto
             // 
-            dataGridViewCellStyle4.NullValue = "0";
-            this.precioProducto.DefaultCellStyle = dataGridViewCellStyle4;
             this.precioProducto.HeaderText = "Precio";
             this.precioProducto.Name = "precioProducto";
             this.precioProducto.ReadOnly = true;
             // 
             // subtotalProducto
             // 
+            dataGridViewCellStyle6.NullValue = "0";
+            this.subtotalProducto.DefaultCellStyle = dataGridViewCellStyle6;
             this.subtotalProducto.HeaderText = "Subtotal";
             this.subtotalProducto.Name = "subtotalProducto";
             this.subtotalProducto.ReadOnly = true;
             // 
             // descuentoProducto
             // 
-            dataGridViewCellStyle5.NullValue = "0";
-            this.descuentoProducto.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle7.NullValue = "0";
+            this.descuentoProducto.DefaultCellStyle = dataGridViewCellStyle7;
             this.descuentoProducto.HeaderText = "Descuento(%)";
             this.descuentoProducto.Name = "descuentoProducto";
             // 
             // totalProducto
             // 
-            dataGridViewCellStyle6.NullValue = "0";
-            this.totalProducto.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle8.NullValue = "0";
+            this.totalProducto.DefaultCellStyle = dataGridViewCellStyle8;
             this.totalProducto.HeaderText = "Total";
             this.totalProducto.Name = "totalProducto";
             this.totalProducto.ReadOnly = true;

@@ -29,10 +29,10 @@ namespace DAO
         /// </summary>
         public abstract void limpiar();
 
-        public void select<X,T>(X id, T nombre)
+        public void select<X,T>(X campo1, T campo2)
         {
             conexion.Open();
-            OracleCommand cmd = selectCliente(id,nombre);
+            OracleCommand cmd = selectCliente(campo1, campo2);
             OracleDataReader reader = cmd.ExecuteReader();
 
             if (reader.HasRows)

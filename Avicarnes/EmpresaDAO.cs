@@ -25,7 +25,7 @@ namespace DAO
         {
         }
         
-        protected override void setDatosCliente(OracleDataReader reader)
+        protected override void setDatosCliente(OracleDataReader reader)//Solo guarda nombre y direccion de la empresa
         {
             factura.NombreEmpresa = reader.GetString(0);
             factura.DireccionEmpresa = reader.GetString(1);

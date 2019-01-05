@@ -6,7 +6,6 @@ namespace DAO
 {
     public class TelefonoDAO :Plantilla
     {        
-
         public TelefonoDAO(OracleConnection cn)
         {
             Persona = new AccesoCliente();
@@ -21,8 +20,8 @@ namespace DAO
             orcl.Parameters.Add(Param.getFuncionRef());
             orcl.Parameters.Add(Param.getParam("PN_ID_CLIENTE", DbType.Int32));
             orcl.Parameters.Add(Param.getParam("PV_NOMBRE", DbType.String));
-            setParamsValueSelect(orcl, id, nombre);
-            return orcl;
+            
+            return setParamsValueSelect(orcl, id, nombre);
         }
 
         private OracleCommand setParamsValueSelect(OracleCommand cmd, int? id, string nombre)

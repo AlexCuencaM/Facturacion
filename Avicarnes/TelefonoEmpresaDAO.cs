@@ -21,7 +21,7 @@ namespace DAO
         /// <typeparam name="T">string</typeparam>        
         /// <returns></returns>
    
-        public override OracleCommand selectCliente<X, T>(X id, T nombre)
+        public override OracleCommand selectCliente<X, T>(X id, T nombre)//Parametros de mas
         {
             return selectCliente("datos_Empresa_pk.SELECTTELEFONOEMPRESA");
         }

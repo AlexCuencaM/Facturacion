@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Avicarnes
+﻿namespace Avicarnes
 {
     public class DescripcionProducto
     {
@@ -17,6 +11,12 @@ namespace Avicarnes
         {
             Descripcion = descripcion;
             Precio = precio;
+        }
+        public void setValores(string descripcion, double peso, decimal precio, decimal subtotal)
+        {
+            setValores(descripcion,precio);
+            Peso = peso;
+            Subtotal = subtotal;
         }
 
         public double Peso { get => peso; set => peso = value; }
@@ -32,8 +32,7 @@ namespace Avicarnes
         public int getId()
         {
             return numeroSerie.Id;
-        }
-
-
+        }        
+        
     }
 }

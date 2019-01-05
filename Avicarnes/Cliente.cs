@@ -1,8 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace Avicarnes
 {
     public class Cliente
@@ -25,8 +21,6 @@ namespace Avicarnes
         {
             telf =  new Telefono();
         }
-
-
         public void limpiar()
         {
             Nombre = "";
@@ -35,7 +29,6 @@ namespace Avicarnes
             Estado = "";
             telf.limpiar();
         }
-
         public string Nombre { get => nombre; set => nombre = value; }
         public string Direccion { get => direccion; set => direccion = value; }
         public int Id { get => id; set => id = value; }

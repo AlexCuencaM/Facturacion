@@ -1,16 +1,13 @@
 ﻿using System.Data;
-using System.Collections.Generic;
 using Oracle.ManagedDataAccess.Client;
 using Avicarnes;
 namespace DAO
 {
     public class SubtotalProductoDAO : ProductoDAO
-    {
-        
-
+    {       
         public SubtotalProductoDAO(OracleConnection conexion):base(conexion)
-        {            
-
+        {
+            Product = new DescripcionProducto();
         }
         public override void limpiar()
         {
