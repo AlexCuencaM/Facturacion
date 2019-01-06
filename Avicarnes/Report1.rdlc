@@ -530,7 +530,9 @@
                                   <TextRuns>
                                     <TextRun>
                                       <Value>=Fields!Precio.Value</Value>
-                                      <Style />
+                                      <Style>
+                                        <Format>'$'0.00</Format>
+                                      </Style>
                                     </TextRun>
                                   </TextRuns>
                                   <Style />
@@ -546,8 +548,10 @@
                                 <PaddingRight>2pt</PaddingRight>
                                 <PaddingTop>2pt</PaddingTop>
                                 <PaddingBottom>2pt</PaddingBottom>
+                                <rd:FormatSymbolCulture>es-EC</rd:FormatSymbolCulture>
                               </Style>
                             </Textbox>
+                            <rd:Selected>true</rd:Selected>
                           </CellContents>
                         </TablixCell>
                         <TablixCell>
@@ -1705,7 +1709,7 @@
             <Top>1.47849cm</Top>
             <Left>0.3937cm</Left>
             <Height>1.2cm</Height>
-            <Width>8.62479cm</Width>
+            <Width>8.6248cm</Width>
             <ZIndex>9</ZIndex>
             <Style>
               <Border>

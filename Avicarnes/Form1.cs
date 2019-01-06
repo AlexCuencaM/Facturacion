@@ -13,15 +13,12 @@ namespace Avicarnes
 {
     public partial class Form1 : Form
     {
-        private OracleConnection conexion;              
-        private DelegadoCliente cliente;
+        private OracleConnection conexion;                      
         private Factura factura;
-
         public Form1()
-        {
+        {          
             conexion = new OracleConnection("DATA SOURCE=localhost:1521/XE;PERSIST SECURITY INFO=True;USER ID=ADMINISTRADOR;PASSWORD=avicarnes");            
-            factura = new Factura();
-            
+            factura = new Factura();            
             InitializeComponent();
         }
 
@@ -32,8 +29,7 @@ namespace Avicarnes
         }        
         
         private void textBoxIdCliente_TextChanged(object sender, EventArgs e)
-        {
-           
+        {           
             if (textBoxIdCliente.Focused)                 
                 operacionDatosCliente(textBoxIdCliente, textBoxCliente,BuscarPor.ID);           
         }
@@ -90,27 +86,11 @@ namespace Avicarnes
         
         private void buttonGenerarFactura_Click(object sender, EventArgs e)
         {            
-            List<DescripcionProducto> productos = new List<DescripcionProducto>();
-            List<LineaProducto> lineaProductos = new List<LineaProducto>();
-            foreach (DataGridViewRow i in dataGridViewProducto.Rows)
-            {                
-                LineaProducto lista = new LineaProducto();
-                DescripcionProducto a = new DescripcionProducto();                
-                if (i.Cells[1].Value != null && i.Cells[3].Value != null)
-                {
-                    a.crearProducto(Convert.ToInt32(i.Cells[0].Value) );
-
-                    a.setValores(i.Cells[1].Value.ToString(), Convert.ToDouble(i.Cells[3].Value),
-                        Convert.ToDecimal(i.Cells[4].Value), Convert.ToDecimal(i.Cells[5].Value));
-
-                    lista.setValores(Convert.ToInt32(i.Cells[2].Value), Convert.ToInt32(i.Cells[6].Value), Convert.ToDecimal(i.Cells[7].Value));
-
-                    productos.Add(a);
-                    lineaProductos.Add(lista);
-                }                
-            }            
-            Form2 b = new Form2(productos, lineaProductos, factura);
-            b.Show();          
+            Pedido pedido = new Pedido();
+            pedido = pedido.listas(dataGridViewProducto.Rows);
+            pedido.Factura = factura;
+            Form2 form = new Form2(pedido);         
+            form.Show();          
         }
         
         private void dataGridViewProducto_CellEndEdit(object sender, DataGridViewCellEventArgs e)

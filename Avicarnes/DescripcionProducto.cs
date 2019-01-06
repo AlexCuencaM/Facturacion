@@ -7,6 +7,10 @@
         private decimal precio;
         private double peso;
         private decimal subtotal;
+        public void crearProducto()
+        {
+            NumeroSerie = new Producto();
+        }
         public void setValores(string descripcion, decimal precio)
         {
             Descripcion = descripcion;
