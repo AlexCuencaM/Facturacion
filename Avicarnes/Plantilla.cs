@@ -31,23 +31,32 @@ namespace DAO
 
         public void select<X,T>(X campo1, T campo2)
         {
-            conexion.Open();
-            OracleCommand cmd = selectCliente(campo1, campo2);
-            OracleDataReader reader = cmd.ExecuteReader();
-
-            if (reader.HasRows)
+            try
             {
-                while (reader.Read())
+                conexion.Open();
+                OracleCommand cmd = selectCliente(campo1, campo2);
+                OracleDataReader reader = cmd.ExecuteReader();
+
+                if (reader.HasRows)
                 {
-                    setDatosCliente(reader);
+                    while (reader.Read())
+                    {
+                        setDatosCliente(reader);
+                    }
                 }
+
+                else
+                    limpiar();
+
+                reader.Close();
+                conexion.Close();
             }
-
-            else          
-                limpiar();
-
-            reader.Close();
-            conexion.Close();
+            catch(OracleException)
+            {
+                System.Windows.Forms.MessageBox.Show("Conecte su base de datos");
+                conexion.Close();
+            }
+            
         }
 
     }
