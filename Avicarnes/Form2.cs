@@ -8,8 +8,8 @@ namespace Avicarnes
     {
         private List<Factura> facturas;
         private List<Cliente> clientes;
-
         private Pedido pedido;
+
         public Form2(Pedido pedido)
         {
             this.pedido = pedido;
@@ -33,12 +33,14 @@ namespace Avicarnes
         }
         private void origenes()
         {
+            
             agregarData("Producto", pedido.DescripcionProductos);
             agregarData("ProductoId", getCodigo());
             agregarData("LineaProducto", pedido.Productos);
             agregarData("FacturaProducto",facturas);
             agregarData("ClienteFactura",clientes);
         }
+        
         private void agregarData <T>(string nombre,List<T> lista)
         {
             ReportDataSource rds1 = new ReportDataSource(nombre, lista);

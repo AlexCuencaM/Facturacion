@@ -89,6 +89,7 @@ namespace Avicarnes
             Pedido pedido = new Pedido();
             pedido = pedido.listas(dataGridViewProducto.Rows);
             pedido.Factura = factura;
+        
             Form2 form = new Form2(pedido);         
             form.Show();          
         }
