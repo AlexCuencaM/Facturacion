@@ -1,6 +1,4 @@
-﻿using System.Windows.Forms;
-using DAO;
-
+﻿using DAO;
 namespace Avicarnes
 {
     public abstract class CargaDeDatos<T>

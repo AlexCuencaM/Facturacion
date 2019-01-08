@@ -44,8 +44,7 @@ namespace Avicarnes
         }        
 
         private void AddValor(LineaProducto producto, DescripcionProducto descripcionProducto)
-        {
-            MessageBox.Show(descripcionProducto.NumeroSerie.Id.ToString());
+        {         
             DescripcionProductos.Add(descripcionProducto);            
             Productos.Add(producto);
         }

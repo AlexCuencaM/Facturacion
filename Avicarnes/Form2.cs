@@ -6,8 +6,9 @@ namespace Avicarnes
 {
     public partial class Form2 : Form
     {
-        private List<Factura> facturas;
-        private List<Cliente> clientes;
+        private List<Factura> facturas = new List<Factura>();
+        private List<Cliente> clientes = new List<Cliente>();
+        private List<Telefono> telefonos = new List<Telefono>();
         private Pedido pedido;
 
         public Form2(Pedido pedido)
@@ -17,11 +18,10 @@ namespace Avicarnes
             InitializeComponent();
         }
         private void initListas(Pedido pedido)
-        {
-            facturas = new List<Factura>();
-            clientes = new List<Cliente>();
+        {            
             facturas.Add(pedido.Factura);
             clientes.Add(pedido.Factura.Cliente);
+            telefonos.Add(pedido.Factura.Cliente.Telf);
         }
 
         private void Form2_Load(object sender, EventArgs e)
@@ -31,16 +31,24 @@ namespace Avicarnes
             origenes();
             this.reportViewer1.RefreshReport();
         }
+
         private void origenes()
         {
-            
+            origenCliente();
+            origenProducto();            
+        }
+        private void origenProducto()
+        {
             agregarData("Producto", pedido.DescripcionProductos);
             agregarData("ProductoId", getCodigo());
             agregarData("LineaProducto", pedido.Productos);
-            agregarData("FacturaProducto",facturas);
-            agregarData("ClienteFactura",clientes);
         }
-        
+        private void origenCliente()
+        {
+            agregarData("FacturaProducto", facturas);
+            agregarData("ClienteFactura", clientes);
+            agregarData("ClienteTelefono", telefonos);
+        }
         private void agregarData <T>(string nombre,List<T> lista)
         {
             ReportDataSource rds1 = new ReportDataSource(nombre, lista);

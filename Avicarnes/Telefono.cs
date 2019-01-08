@@ -9,10 +9,14 @@ namespace Avicarnes
     public class Telefono
     {
         private List<string> listaTelefono;
+        private string numeroTelefonos;
         public List<string> ListaTelefono { get => listaTelefono; set => listaTelefono = value; }
-
+        public string NumeroTelefonos { get => numeroTelefonos; set => numeroTelefonos = value; }
+        
+        
         public Telefono()
         {
+            NumeroTelefonos = "";
             listaTelefono = new List<string>();
         }
 
@@ -32,11 +36,10 @@ namespace Avicarnes
         } 
 
         public string presentarTelf()
-        {
-            string result = "";
+        {            
             foreach (string i in listaTelefono)
-                result += i + "    ";
-            return result;
+                numeroTelefonos += i + "  ";
+            return numeroTelefonos;
         }
     }
 }

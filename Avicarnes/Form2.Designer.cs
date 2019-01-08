@@ -31,12 +31,20 @@
             this.components = new System.ComponentModel.Container();
             Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
             Microsoft.Reporting.WinForms.ReportDataSource reportDataSource2 = new Microsoft.Reporting.WinForms.ReportDataSource();
-            this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             this.DescripcionProductoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.ProductoBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             ((System.ComponentModel.ISupportInitialize)(this.DescripcionProductoBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ProductoBindingSource)).BeginInit();
             this.SuspendLayout();
+            // 
+            // DescripcionProductoBindingSource
+            // 
+            this.DescripcionProductoBindingSource.DataSource = typeof(Avicarnes.DescripcionProducto);
+            // 
+            // ProductoBindingSource
+            // 
+            this.ProductoBindingSource.DataSource = typeof(Avicarnes.Producto);
             // 
             // reportViewer1
             // 
@@ -54,14 +62,6 @@
             this.reportViewer1.Size = new System.Drawing.Size(1248, 555);
             this.reportViewer1.TabIndex = 0;
             // 
-            // DescripcionProductoBindingSource
-            // 
-            this.DescripcionProductoBindingSource.DataSource = typeof(Avicarnes.DescripcionProducto);
-            // 
-            // ProductoBindingSource
-            // 
-            this.ProductoBindingSource.DataSource = typeof(Avicarnes.Producto);
-            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -69,7 +69,7 @@
             this.ClientSize = new System.Drawing.Size(1248, 555);
             this.Controls.Add(this.reportViewer1);
             this.Name = "Form2";
-            this.Text = "Form2";
+            this.Text = "Factura";
             this.Load += new System.EventHandler(this.Form2_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DescripcionProductoBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ProductoBindingSource)).EndInit();
