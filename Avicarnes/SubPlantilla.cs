@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Avicarnes;
-using Oracle.ManagedDataAccess.Client;
-
+﻿using Avicarnes;
 namespace DAO
 {
     public abstract class SubPlantilla:Plantilla

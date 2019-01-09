@@ -6,12 +6,10 @@ namespace DAO
     public class EmpresaDAO:Plantilla
     {
         private Factura factura;
-
         public Factura Factura { get => factura; set => factura = value; }
 
         public EmpresaDAO(OracleConnection cn, Factura factura)
-        {
-            Persona = new AccesoCliente();
+        {        
             Param = new ParametrosOracle();
             this.factura = factura;
             Conexion = cn;
