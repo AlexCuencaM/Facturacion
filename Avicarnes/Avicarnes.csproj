@@ -105,6 +105,7 @@
     <Compile Include="ParametrosOracle.cs" />
     <Compile Include="Pedido.cs" />
     <Compile Include="Plantilla.cs" />
+    <Compile Include="PlantillaCiente.cs" />
     <Compile Include="Producto.cs" />
     <Compile Include="ProductoDAO.cs" />
     <Compile Include="Program.cs" />

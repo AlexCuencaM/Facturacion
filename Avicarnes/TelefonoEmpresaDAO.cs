@@ -7,7 +7,7 @@ namespace DAO
     {       
         public TelefonoEmpresaDAO(OracleConnection cn):base(cn)
         {
-            Persona.Cliente.crearTelefono();
+            Campo.Cliente.crearTelefono();
         }
         
         public override void limpiar()

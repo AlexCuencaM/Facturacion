@@ -16,19 +16,17 @@ namespace Avicarnes
             campo = currentRow;
         }        
         protected override void presentarData(Plantilla dato)
-        {
-            SubPlantilla product = (SubPlantilla)dato;            
+        {                      
             if (campo.Cells[0].Value != null)
                 if (!String.IsNullOrEmpty(campo.Cells[0].Value.ToString()))
-                    asignarValor(product);                        
+                    asignarValor((PlantillaCliente<LineaProducto>)dato);                        
         }
-        protected virtual void asignarValor(SubPlantilla subPlantilla)
+        protected virtual void asignarValor(PlantillaCliente<LineaProducto> subPlantilla)
         {
             subPlantilla.select(Convert.ToInt32(campo.Cells[0].Value), "NA");
-            campo.Cells[1].Value = subPlantilla.Lista.getDescripcion();
-            campo.Cells[4].Value = subPlantilla.Lista.getPrecio();
-            LineaProducto = subPlantilla.Lista;
-            
+            campo.Cells[1].Value = subPlantilla.Campo.getDescripcion();
+            campo.Cells[4].Value = subPlantilla.Campo.getPrecio();
+            LineaProducto = subPlantilla.Campo;            
         }
     }
 }

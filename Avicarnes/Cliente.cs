@@ -10,7 +10,7 @@ namespace Avicarnes
         private int id;
         public Cliente(string nombre)
         {
-            Nombre = nombre;
+            Nombre = nombre;            
         }
         public Cliente()
         {

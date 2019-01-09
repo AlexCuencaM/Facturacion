@@ -17,10 +17,14 @@ namespace Avicarnes
 
         protected override void presentarData(Plantilla dato)
         {
-            FacturaDAO factura = (FacturaDAO)dato;
-            campo.Text = "Nota de Venta:\n\n" + " " + factura.Factura.Id;
-            fecha.Text = "Fecha:\n\n" + "  " + factura.Factura.Fecha;
-            this.factura = factura.Factura;
+            presentarData((PlantillaCliente<Factura>)dato);
+            
+        }
+        private void presentarData(PlantillaCliente<Factura> dato)
+        {
+            campo.Text = "Nota de Venta:\n\n" + " " + dato.Campo.Id;
+            fecha.Text = "Fecha:\n\n" + "  " + dato.Campo.Fecha;
+            this.factura = dato.Campo;
         }
     }
 }

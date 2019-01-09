@@ -27,7 +27,7 @@ namespace DAO
 
         public AccesoCliente Persona()
         {
-            return sistemaBd.ClienteBd.Persona;
+            return sistemaBd.ClienteBd.Campo;
         }
 
         public string getTelf()

@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Oracle.ManagedDataAccess.Client;
 using System.Windows.Forms;
 using DAO;
@@ -18,7 +16,9 @@ namespace Avicarnes
         public Form1()
         {          
             conexion = new OracleConnection("DATA SOURCE=localhost:1521/XE;PERSIST SECURITY INFO=True;USER ID=ADMINISTRADOR;PASSWORD=avicarnes");            
-            factura = new Factura();            
+            factura = new Factura();
+            factura.Cliente = new Cliente();
+            factura.Cliente.crearTelefono();
             InitializeComponent();
         }
 
@@ -81,15 +81,15 @@ namespace Avicarnes
         private void loadTelf()
         {
             CargaDeDatos<Label> telefono = new CargaTelefonoEmpresa(labelTelfonoDeEmpresa);
-            telefono.cargar(new TelefonoEmpresaDAO(conexion));            
+            telefono.cargar(new TelefonoEmpresaDAO(conexion));       
+            
         }     
         
         private void buttonGenerarFactura_Click(object sender, EventArgs e)
         {            
             Pedido pedido = new Pedido();
             pedido = pedido.listas(dataGridViewProducto.Rows);
-            pedido.Factura = factura;
-        
+            pedido.Factura = factura;        
             Form2 form = new Form2(pedido);         
             form.Show();          
         }
@@ -118,7 +118,7 @@ namespace Avicarnes
         private void codigo()
         {
             CargaDeDatos<DataGridViewRow> cargarProducto = new CargaDeProducto(dataGridViewProducto.CurrentRow);
-            SubPlantilla product = new ProductoDAO(conexion,dataGridViewProducto.CurrentRow);            
+            PlantillaCliente<LineaProducto> product = new ProductoDAO(conexion,dataGridViewProducto.CurrentRow);            
             cargarProducto.cargar(product);
             subtotal();
             total();
@@ -126,7 +126,7 @@ namespace Avicarnes
         private void subtotal()
         {            
             CargaDeDatos<DataGridViewRow> cargarSubtotal = new CargaSubtotalProducto(dataGridViewProducto.CurrentRow);
-            SubPlantilla producto = new SubtotalProductoDAO(conexion);
+            PlantillaCliente<LineaProducto> producto = new SubtotalProductoDAO(conexion);
             cargarSubtotal.cargar(producto);
             total();
             dataGridViewProducto.CurrentRow.Cells[6].ReadOnly = false;                                    
@@ -135,7 +135,7 @@ namespace Avicarnes
         private void total()
         {
             CargaDeDatos<DataGridViewRow> cargartotal = new CargarTotalProducto(dataGridViewProducto.CurrentRow);
-            SubPlantilla producto = new TotalProductoDAO(conexion);
+            PlantillaCliente<LineaProducto> producto = new TotalProductoDAO(conexion);
             cargartotal.cargar(producto);            
         }
 

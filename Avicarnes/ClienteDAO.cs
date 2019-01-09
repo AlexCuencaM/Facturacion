@@ -3,12 +3,12 @@ using System.Data;
 using Avicarnes;
 namespace DAO
 {
-    public class ClienteDAO:Plantilla
+    public class ClienteDAO:PlantillaCliente<AccesoCliente>
     {
         
         public ClienteDAO(OracleConnection cn)
         {            
-            Persona = new AccesoCliente();
+            Campo = new AccesoCliente();
             Param = new ParametrosOracle();
             Conexion = cn;
         }       
@@ -20,11 +20,11 @@ namespace DAO
 
         public override void limpiar()
         {
-            Persona.Cliente.limpiar();
+            Campo.Cliente.limpiar();
         }
         protected override void setDatosCliente(OracleDataReader reader)
         {
-            Persona.setDatosCliente(reader.GetInt32(0), reader.GetString(1), reader.GetString(2),reader.GetString(3));
+            Campo.setDatosCliente(reader.GetInt32(0), reader.GetString(1), reader.GetString(2),reader.GetString(3));
         }
 
         private OracleCommand setParamsValueSelect(OracleCommand cmd, int? id, string nombre)

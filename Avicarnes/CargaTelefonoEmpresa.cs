@@ -11,7 +11,7 @@ namespace Avicarnes
         protected override void presentarData(Plantilla dato)
         {
             TelefonoEmpresaDAO datoTelf = (TelefonoEmpresaDAO)dato;
-            campo.Text += "  " + datoTelf.Persona.Cliente.Telf.presentarTelf();
+            campo.Text += "  " + datoTelf.Campo.Cliente.Telf.presentarTelf();
         }
     }
 }

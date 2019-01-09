@@ -4,21 +4,19 @@ using Oracle.ManagedDataAccess.Client;
 namespace DAO
 {
 
-    public class FacturaDAO : Plantilla
-    {
-        private Factura factura;
-        public Factura Factura { get => factura; }
+    public class FacturaDAO : PlantillaCliente<Factura>
+    {    
 
         public FacturaDAO(OracleConnection cn, Factura factura)
         {
             Param = new ParametrosOracle();
             Conexion = cn;
-            this.factura = factura;
+            Campo = factura;
         }     
         protected override void setDatosCliente(OracleDataReader reader)//Solo es el id y la fecha
         {
-            factura.Id = reader.GetInt32(0);
-            factura.Fecha = reader.GetString(1);
+            Campo.Id = reader.GetInt32(0);
+            Campo.Fecha = reader.GetString(1);
         }
 
         public override OracleCommand selectCliente<X, T>(X id, T nombre)//Parametros no usados
@@ -28,8 +26,8 @@ namespace DAO
 
         public override void limpiar()
         {
-            factura.Id = 0;
-            factura.Fecha = "";
+            Campo.Id = 0;
+            Campo.Fecha = "";
         }
 
         public OracleCommand selectCliente(string procedure)

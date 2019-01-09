@@ -4,11 +4,11 @@ using System.Data;
 using Avicarnes;
 namespace DAO
 {
-    public class TelefonoDAO :Plantilla
+    public class TelefonoDAO :PlantillaCliente<AccesoCliente>
     {        
         public TelefonoDAO(OracleConnection cn)
         {
-            Persona = new AccesoCliente();
+            Campo = new AccesoCliente();
             Param = new ParametrosOracle();
             Conexion = cn;
         }    
@@ -32,11 +32,11 @@ namespace DAO
         }
         public override void limpiar()
         {
-            Persona.LimpiarLista();
+            Campo.LimpiarLista();
         }
         protected override void setDatosCliente(OracleDataReader reader)
         {
-            Persona.setDatosTelefono(reader.GetString(0));
+            Campo.setDatosTelefono(reader.GetString(0));
         }
 
         /// <summary>
@@ -55,9 +55,9 @@ namespace DAO
         public List<string> getTelf()
         {
             List<string> telf = new List<string>();
-            if (Persona.Cliente.Telf.ListaTelefono == null)
+            if (Campo.Cliente.Telf.ListaTelefono == null)
                 telf.Add("");
-            telf = Persona.Cliente.Telf.ListaTelefono;
+            telf = Campo.Cliente.Telf.ListaTelefono;
             return telf;
         }
     }

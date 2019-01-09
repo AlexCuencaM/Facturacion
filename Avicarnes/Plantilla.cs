@@ -6,10 +6,10 @@ namespace DAO
     {
         private OracleConnection conexion;
         private ParametrosOracle param;
-        private AccesoCliente persona;
+        
 
         protected OracleConnection Conexion { get => conexion; set => conexion = value; }
-        public AccesoCliente Persona { get => persona; set => persona = value; }
+        
         public ParametrosOracle Param { get => param; set => param = value; }
 
         /// <summary>

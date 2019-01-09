@@ -7,7 +7,8 @@ namespace DAO
     {       
         public SubtotalProductoDAO(OracleConnection conexion):base(conexion)
         {
-            Product = new DescripcionProducto();
+            Campo.crearDescripcionProducto();
+            Campo.Producto.crearProducto();
         }
         public override void limpiar()
         {
@@ -32,8 +33,7 @@ namespace DAO
 
         protected override void setDatosCliente(OracleDataReader reader)
         {           
-            Product.Subtotal = reader.GetDecimal(0);
-            Lista.agregarDescripcionProducto(Product);
+            Campo.Producto.Subtotal = reader.GetDecimal(0);            
         }
         public OracleCommand setParamsValueSelect(OracleCommand orcl, double? peso, decimal precio)
         {            

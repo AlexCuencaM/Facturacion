@@ -4,16 +4,15 @@ using Avicarnes;
 using System.Windows.Forms;
 namespace DAO
 {
-    public class ProductoDAO:SubPlantilla
+    public class ProductoDAO:PlantillaCliente<LineaProducto>
     {
         
         public ProductoDAO(OracleConnection conexion,DataGridViewRow id):this(conexion)
-        {
-            
+        {            
             try
-            {
-                Product = new DescripcionProducto();
-                Product.crearProducto(System.Convert.ToInt32(id.Cells[0].Value) );
+            {                
+                Campo.crearDescripcionProducto();                
+                Campo.Producto.crearProducto(System.Convert.ToInt32(id.Cells[0].Value) );
             }
             catch(System.FormatException)
             {
@@ -26,14 +25,14 @@ namespace DAO
         public ProductoDAO(OracleConnection connection)
         {
             Param = new ParametrosOracle();
-            Lista = new LineaProducto();            
+            Campo = new LineaProducto();            
             Conexion = connection;
         }
 
         public override void limpiar()
-        {
-            Product.setValores("", 0);
-            Lista = new LineaProducto(Product);
+        {            
+            Campo.Producto.setValores("", 0);
+            
         }
         /// <summary>
         /// Elabora una consulta que busca un producto por su código
@@ -50,9 +49,7 @@ namespace DAO
 
         protected override void setDatosCliente(OracleDataReader reader)//Descripcion y peso
         {
-            Product.setValores(reader.GetString(0),reader.GetDecimal(1));
-            Lista.agregarDescripcionProducto(Product);
-            
+            Campo.Producto.setValores(reader.GetString(0),reader.GetDecimal(1));                       
         }
 
         private OracleCommand setParamsValueSelect(OracleCommand cmd, int id)

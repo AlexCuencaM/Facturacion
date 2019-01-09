@@ -13,13 +13,12 @@ namespace Avicarnes
             
         }
         protected override void presentarData(Plantilla dato)
-        {
-            SubPlantilla product = (SubPlantilla)dato;
+        {            
             try
             {
                 if (campo.Cells[3].Value != null)
                     if (!String.IsNullOrEmpty(campo.Cells[3].Value.ToString()))
-                        asignarValor((SubPlantilla)dato);
+                        asignarValor((PlantillaCliente<LineaProducto>)dato);
             }
             catch(FormatException)
             {
@@ -27,10 +26,10 @@ namespace Avicarnes
             }            
                 
         }
-        protected override void asignarValor(SubPlantilla subPlantilla)
+        protected override void asignarValor(PlantillaCliente<LineaProducto> subPlantilla)
         {            
             subPlantilla.select(Convert.ToDouble(campo.Cells[3].Value),Convert.ToDecimal(campo.Cells[4].Value) );
-            campo.Cells[5].Value = subPlantilla.Lista.Producto.Subtotal;
+            campo.Cells[5].Value = subPlantilla.Campo.Producto.Subtotal;
             
         }
     }

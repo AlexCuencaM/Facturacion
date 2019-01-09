@@ -26,7 +26,7 @@ namespace DAO
 
         protected override void setDatosCliente(OracleDataReader reader)
         {
-             Lista.TotalProducto = reader.GetDecimal(0);                        
+             Campo.TotalProducto = reader.GetDecimal(0);                        
         }
         public OracleCommand setParamsValueSelect(OracleCommand orcl, int? descuento, decimal subtotal)
         {
