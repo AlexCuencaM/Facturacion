@@ -98,6 +98,8 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Iinsert.cs" />
+    <Compile Include="Iupdate.cs" />
     <Compile Include="LineaProducto.cs" />
     <Compile Include="BusquedaDual.cs" />
     <Compile Include="Pago.cs" />

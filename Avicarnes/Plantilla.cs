@@ -1,17 +1,13 @@
-﻿using Avicarnes;
-using Oracle.ManagedDataAccess.Client;
+﻿using Oracle.ManagedDataAccess.Client;
 namespace DAO
 {
     public abstract class Plantilla: IDao
     {
         private OracleConnection conexion;
-        private ParametrosOracle param;
-        
+        private ParametrosOracle param;        
 
-        protected OracleConnection Conexion { get => conexion; set => conexion = value; }
-        
+        protected OracleConnection Conexion { get => conexion; set => conexion = value; }        
         public ParametrosOracle Param { get => param; set => param = value; }
-
         /// <summary>
         /// Es un metodo que extrae la consulta dela BD
         /// </summary>

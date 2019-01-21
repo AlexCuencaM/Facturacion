@@ -38,6 +38,9 @@ namespace DAO
             orcl.Parameters.Add(Param.getFuncionRef());
             return orcl;
         }
-
+        public override OracleCommand insertCliente(AccesoCliente elemento)
+        {
+            return base.insertCliente(elemento);
+        }
     }
 }

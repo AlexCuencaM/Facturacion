@@ -3,7 +3,7 @@ using System.Data;
 using Avicarnes;
 namespace DAO
 {
-    public class ClienteDAO:PlantillaCliente<AccesoCliente>
+    public class ClienteDAO:SubPlantilla<AccesoCliente>
     {
         
         public ClienteDAO(OracleConnection cn)
@@ -41,6 +41,11 @@ namespace DAO
             orcl.Parameters.Add(Param.getParam("PN_ID", DbType.Int32) ) ;
             orcl.Parameters.Add(Param.getParam("PV_NOMBRE",DbType.String));            
             return setParamsValueSelect(orcl, id, nombre); ;
+        }
+
+        public override OracleCommand insertCliente(AccesoCliente elemento)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

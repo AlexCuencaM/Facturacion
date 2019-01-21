@@ -3,10 +3,8 @@ using Avicarnes;
 using Oracle.ManagedDataAccess.Client;
 namespace DAO
 {
-
-    public class FacturaDAO : PlantillaCliente<Factura>
+    public class FacturaDAO : SubPlantilla<Factura>
     {    
-
         public FacturaDAO(OracleConnection cn, Factura factura)
         {
             Param = new ParametrosOracle();
@@ -36,7 +34,29 @@ namespace DAO
             orcl.CommandType = CommandType.StoredProcedure;
             orcl.Parameters.Add(Param.getFuncionRef());
             return orcl;
+        }        
+
+        public override OracleCommand insertCliente(Factura elemento)
+        {
+            OracleCommand orcl = new OracleCommand("factura_pk.insert_factura");
+            orcl.CommandType = CommandType.StoredProcedure;            
+            parametros(orcl);
+            return setParamsValueInsert(orcl, elemento);
+        }
+        private void parametros(OracleCommand orcl)
+        {
+            orcl.Parameters.Add(Param.getParam("pn_id_factura", DbType.Int32));
+            orcl.Parameters.Add(Param.getParam("pv_fecha", DbType.String));
+            orcl.Parameters.Add(Param.getParam("pn_id_cliente", DbType.Int32));
+            orcl.Parameters.Add(Param.getParam("pv_nombre_cliente", DbType.String));
+        }
+        private OracleCommand setParamsValueInsert(OracleCommand cmd, Factura factura)
+        {
+            cmd.Parameters[0].Value = factura.Id;
+            cmd.Parameters[1].Value = factura.Fecha;
+            cmd.Parameters[2].Value = factura.Cliente.Id;
+            cmd.Parameters[3].Value = factura.Cliente.Nombre;
+            return cmd;
         }
     }
 }
-

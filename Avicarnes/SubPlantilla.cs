@@ -1,11 +1,25 @@
-﻿using Avicarnes;
+﻿using Oracle.ManagedDataAccess.Client;
 namespace DAO
 {
-    public abstract class SubPlantilla:Plantilla
+    public abstract class SubPlantilla<T> : PlantillaCliente<T>, Iinsert<T>
     {
-        private DescripcionProducto product;
-        private LineaProducto lista;
-        protected DescripcionProducto Product { get => product; set => product = value; }
-        public LineaProducto Lista { get => lista; set => lista = value; }
+        public void insert(T elemento)
+        {
+            try
+            {
+                Conexion.Open();
+                OracleCommand cmd = insertCliente(elemento);
+                cmd.ExecuteNonQuery();                
+                Conexion.Close();
+            }
+            catch (OracleException)
+            {
+                System.Windows.Forms.MessageBox.Show("Error :(");
+                Conexion.Close();
+            }
+        }
+                
+        public abstract OracleCommand insertCliente(T elemento);        
+
     }
 }

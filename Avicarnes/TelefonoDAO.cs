@@ -4,7 +4,7 @@ using System.Data;
 using Avicarnes;
 namespace DAO
 {
-    public class TelefonoDAO :PlantillaCliente<AccesoCliente>
+    public class TelefonoDAO :SubPlantilla<AccesoCliente>
     {        
         public TelefonoDAO(OracleConnection cn)
         {
@@ -17,11 +17,14 @@ namespace DAO
         {
             OracleCommand orcl = new OracleCommand(procedure, Conexion);
             orcl.CommandType = CommandType.StoredProcedure;
+            addParams(orcl);            
+            return setParamsValueSelect(orcl, id, nombre);
+        }
+        private void addParams(OracleCommand orcl)
+        {
             orcl.Parameters.Add(Param.getFuncionRef());
             orcl.Parameters.Add(Param.getParam("PN_ID_CLIENTE", DbType.Int32));
             orcl.Parameters.Add(Param.getParam("PV_NOMBRE", DbType.String));
-            
-            return setParamsValueSelect(orcl, id, nombre);
         }
 
         private OracleCommand setParamsValueSelect(OracleCommand cmd, int? id, string nombre)
@@ -57,8 +60,13 @@ namespace DAO
             List<string> telf = new List<string>();
             if (Campo.Cliente.Telf.ListaTelefono == null)
                 telf.Add("");
-            telf = Campo.Cliente.Telf.ListaTelefono;
+            telf = Campo.Cliente.Telf.ListaTelefono;            
             return telf;
+        }
+
+        public override OracleCommand insertCliente(AccesoCliente elemento)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

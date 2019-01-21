@@ -25,11 +25,7 @@ namespace Avicarnes
             ListaTelefono.Add(telf);
         }
 
-        public string telefono(int index)
-        {
-            return listaTelefono.ElementAt(index - 1);
-        }
-
+       
         public void limpiar()
         {
             listaTelefono.Clear();
